@@ -5,10 +5,11 @@ import { TruthTableRow } from './TruthTableRow/TruthTableRow'
 
 interface Props { 
     tableHeaders: string[];
+    tableRows: Boolean[][];
     expression: string;
 }
 
-export const TruthTable: React.FC<Props> = ({tableHeaders, expression}) => {
+export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression}) => {
     const row_length = [];
     for (let i = 0; i < Math.pow(2, tableHeaders.length); ++i) {
         row_length.push('F');
@@ -29,7 +30,7 @@ export const TruthTable: React.FC<Props> = ({tableHeaders, expression}) => {
                 </thead>
 
                 <tbody>
-                {row_length.map(i => { 
+                {tableRows.map(i => { 
                             return (
                                 <TruthTableRow />
                             )})
