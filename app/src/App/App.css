@@ -1,0 +1,23 @@
+html, body {
+    background-color: #eeeeee;
+}
+
+.title {
+    text-align: center;
+    font-size: 72px;
+}
+
+table {
+    background-color: lightgray;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 48px;
+}
+
+input {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    height: 50px;
+    width: 500px
+}
