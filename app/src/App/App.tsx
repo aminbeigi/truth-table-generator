@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 
 import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
 
 export const App: React.FC = () => {
-    const onChangeHandler = (event: any) => {
-        console.log(event.target.value)
+    const [value, setValue] = useState('');
+
+    const onChangeHandler = (e: any) => {
+        let html_value = e.target.value
+
+        html_value = html_value.replace('a', 'z');
+        setValue(html_value);
+        console.log(value);
     }
     return (
         <div>
