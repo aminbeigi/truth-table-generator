@@ -7,18 +7,23 @@ import { TruthTable } from '../components/TruthTable/TruthTable'
 export const App: React.FC = () => {
     const [value, setValue] = useState('');
 
-    const onChangeHandler = (e: any) => {
+    // TODO: should be react functional comp
+    const OnChangeHandler = (e: any) => {
         let html_value: string = e.target.value
-        // TODO: don't accept characters not in set 
-        html_value = html_value.replace(/[^a-zA-Z0-9/-]/, '');
+        html_value = html_value.replace(/[^a-zA-Z0-9|&∨∧]/, '');
+        html_value = html_value.replace('||', '∨');
+        html_value = html_value.replace('&&', '∧');
         setValue(html_value)
         e.target.value = html_value 
-        console.log(value)
     }
+
+    useEffect(() => {
+        console.log('updated, ', value); 
+      }, [value]);
 
     return (
         <div>
-            <ExpressionField onChangeHandler={onChangeHandler}/>
+            <ExpressionField onChangeHandler={OnChangeHandler}/>
             <TruthTable />
         </div>
     )
