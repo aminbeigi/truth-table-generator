@@ -7,9 +7,10 @@ interface Props {
     tableHeaders: string[];
     tableRows: Boolean[][];
     expression: string;
+    expressionSolution: Boolean;
 }
 
-export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression}) => {
+export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression, expressionSolution}) => {
     const row_length = [];
     for (let i = 0; i < Math.pow(2, tableHeaders.length); ++i) {
         row_length.push('F');
@@ -32,7 +33,7 @@ export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression
                 <tbody>
                 {tableRows.map(tableRow => { 
                             return (
-                                    <TruthTableRow tableRow={tableRow}/>
+                                    <TruthTableRow tableRow={tableRow} expressionSolution={expressionSolution}/>
                             )})
                         }
               </tbody>

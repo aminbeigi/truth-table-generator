@@ -7,7 +7,7 @@ export const permute = (n: number): boolean[][] => {
             let zeros = '0'.repeat(n - bin.length);
             bin = zeros + bin;
         }
-        console.log(bin);
+        //console.log(bin);
 
         for (let c of bin) {
             if (c === '1') {

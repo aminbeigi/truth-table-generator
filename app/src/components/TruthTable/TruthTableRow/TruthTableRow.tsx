@@ -2,20 +2,26 @@ import React from 'react'
 
 interface Props { 
     tableRow: Boolean[];
+    expressionSolution: Boolean;
 }
 
-export const TruthTableRow: React.FC<Props> = ({tableRow}) => {
+export const TruthTableRow: React.FC<Props> = ({tableRow, expressionSolution}) => {
     const test = true;
     return (
         <tr>
             {tableRow.map(tableData => { 
                     return (
-                            (tableData)
-                              ? <td>T</td> 
-                              : <td>F</td> 
+                        (tableData)
+                            ? <td>T</td>
+                            : <td>F</td> 
 
                     )})
                 }
+                            
+            {expressionSolution
+                ? <td>T</td>
+                : <td>F</td>}
+
         </tr>
     )
 }

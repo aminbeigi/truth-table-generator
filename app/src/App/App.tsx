@@ -9,7 +9,8 @@ import { permute } from '../lib/helper'
 export const App: React.FC = () => {
     const [value, setValue] = useState('');
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
-    const [tableRows, setTableRows] = useState<Boolean[][]>([[]])
+    const [tableRows, setTableRows] = useState<Boolean[][]>([])
+    const [expressionSolution, setExpressionSolution] = useState<Boolean>()
 
     // TODO: should be react functional comp
     const OnChangeHandler = (e: any) => {
@@ -32,15 +33,16 @@ export const App: React.FC = () => {
             }
             char_array.push(c);
         }
-        const tableRows = permute(3);
+        const tableRows = permute(char_array.length);
         setTableHeaders(char_array);
         setTableRows(tableRows)
+        setExpressionSolution(true);
     }, [value]);
 
     return (
         <div>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
-            <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value}/>
+            <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolution={expressionSolution}/>
         </div>
     )
 }
