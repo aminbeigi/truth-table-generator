@@ -30,9 +30,9 @@ export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression
                 </thead>
 
                 <tbody>
-                {tableRows.map(i => { 
+                {tableRows.map(tableRow => { 
                             return (
-                                <TruthTableRow />
+                                    <TruthTableRow tableRow={tableRow}/>
                             )})
                         }
               </tbody>

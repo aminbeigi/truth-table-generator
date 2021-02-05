@@ -1,11 +1,19 @@
 import React from 'react'
 
-export const TruthTableRow: React.FC = () => {
+interface Props { 
+    tableRow: Boolean[];
+}
+
+export const TruthTableRow: React.FC<Props> = ({tableRow}) => {
+    const test = true;
     return (
         <tr>
-            <td>F</td>
-            <td>F</td>
-            <td>F</td>
+            {tableRow.map(tableData => { 
+                    return (
+
+                        <td>F</td>
+                    )})
+                }
         </tr>
     )
 }
