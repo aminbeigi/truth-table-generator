@@ -4,6 +4,8 @@ import './App.css';
 import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
 
+import { permute } from '../lib/helper'
+
 export const App: React.FC = () => {
     const [value, setValue] = useState('');
     const [tableHeader, setTableHeader] = useState<string[]>([]);
@@ -29,6 +31,7 @@ export const App: React.FC = () => {
             }
             char_array.push(c);
         }
+        permute(3);
         setTableHeader(char_array);
 
 
