@@ -6,6 +6,7 @@ import { TruthTable } from '../components/TruthTable/TruthTable'
 
 export const App: React.FC = () => {
     const [value, setValue] = useState('');
+    const [tableHeader, setTableHeader] = useState<string[]>([]);
 
     // TODO: should be react functional comp
     const OnChangeHandler = (e: any) => {
@@ -19,12 +20,24 @@ export const App: React.FC = () => {
 
     useEffect(() => {
         console.log('updated, ', value); 
-      }, [value]);
+
+        const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let char_array = [];
+        for (let c of value) {
+            if (!alphabet.includes(c)) {
+                continue;
+            }
+            char_array.push(c);
+        }
+        setTableHeader(char_array);
+
+
+    }, [value]);
 
     return (
         <div>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
-            <TruthTable />
+            <TruthTable tableHeaders={tableHeader} expression={value}/>
         </div>
     )
 }
