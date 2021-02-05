@@ -10,8 +10,10 @@ export const TruthTableRow: React.FC<Props> = ({tableRow}) => {
         <tr>
             {tableRow.map(tableData => { 
                     return (
+                            (tableData)
+                              ? <td>T</td> 
+                              : <td>F</td> 
 
-                        <td>F</td>
                     )})
                 }
         </tr>
