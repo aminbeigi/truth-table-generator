@@ -21,9 +21,9 @@ export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression
             <Table>
                 <thead>
                     <tr>
-                        {tableHeaders.map(tableHeader => { 
+                        {tableHeaders.map((tableHeader, i) => { 
                             return (
-                                <TruthTableHeader tableHeader={tableHeader}/>
+                                <TruthTableHeader key={i} tableHeader={tableHeader}/>
                             )})
                         }
                         <th>{expression}</th>
@@ -33,7 +33,7 @@ export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression
                 <tbody>
                 {tableRows.map((tableRow, i) => { 
                             return (
-                                    <TruthTableRow tableRow={tableRow} expressionSolution={expressionSolutions[i]}/>
+                                    <TruthTableRow key={i} tableRow={tableRow} expressionSolution={expressionSolutions[i]}/>
                             )})
                         }
               </tbody>

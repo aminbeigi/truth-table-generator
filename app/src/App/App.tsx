@@ -85,7 +85,7 @@ export const App: React.FC = () => {
                 console.log("evalString", evalString)
         }
 
-        let temp = [true, false, true, false];
+        //let temp = [true, false, true, false];
         setTableHeaders(charArray);
         setTableRows(tableRows)
         setExpressionSolutions(expressionSolutionArray);

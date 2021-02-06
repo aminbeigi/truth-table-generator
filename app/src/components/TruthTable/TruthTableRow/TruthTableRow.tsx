@@ -8,11 +8,11 @@ interface Props {
 export const TruthTableRow: React.FC<Props> = ({tableRow, expressionSolution}) => {
     return (
         <tr>
-            {tableRow.map(tableData => { 
+            {tableRow.map((tableData, i) => { 
                     return (
                         (tableData)
-                            ? <td>T</td>
-                            : <td>F</td> 
+                            ? <td key={i}>T</td>
+                            : <td key={i}>F</td> 
 
                     )})
                 }
