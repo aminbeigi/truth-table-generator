@@ -8,6 +8,7 @@ export const Icons: React.FC = () => {
     const handleShow = () => setShow(true);
 
     return (
+        // TODO: new line on body
         <>
             <div><button onClick={() => window.open('https://github.com/aminbeigi/truth-table-generator')}><i className="fab fa-github"></i></button></div>
             <div><button onClick={handleShow}><i className="far fa-question-circle"></i></button></div>
