@@ -17,6 +17,5 @@ export const permute = (n: number): boolean[][] => {
         
         outputArray.push(boolArray)
     }
-    console.log(outputArray) 
     return outputArray;
 }

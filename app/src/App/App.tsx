@@ -33,17 +33,35 @@ export const App: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        console.log('updated, ', value); 
-
+        // TODO: support stuff like qq
         const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let char_array = [];
+        let char_array: string[] = [];
         for (let c of value) {
-            if (!alphabet.includes(c)) {
+            if (!alphabet.includes(c) || char_array.includes(c)) {
                 continue;
             }
             char_array.push(c);
         }
         const tableRows = permute(char_array.length);
+
+        let eval_string: string = '';
+        for (let c of value) {
+            if (c == '∨') {
+                eval_string += '||';
+                continue;
+            }
+
+            if (c == '∧') {
+                eval_string += '&&';
+                continue;
+            }
+
+            eval_string += c;
+        }
+
+        const expression: boolean = eval('true');
+        console.log(eval_string)
+
         setTableHeaders(char_array);
         setTableRows(tableRows)
         setExpressionSolution(true);
