@@ -9,7 +9,7 @@ export const ExpressionField: React.FC<Props> = ({onChangeHandler}) => {
     return (
         <div>
             <InputGroup onChange={onChangeHandler} size="lg" className="mb-3">
-                <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+                <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Enter an expression"/>
             </InputGroup>
         </div>
     )
