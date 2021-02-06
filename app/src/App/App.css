@@ -1,8 +1,11 @@
-html, body {
-    background-color: #eeeeee;
+* {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    color:white;
 }
+
 
 .title {
     text-align: center;
@@ -10,26 +13,14 @@ html, body {
 }
 
 table {
-    background-color: lightgray;
     margin: 0 auto;
     text-align: center;
-    font-size: 48px;
-    border: 1px solid grey;
-}
-
-th {
-    padding: 30px;
-}
-
-tr {
-    border: 2px solid red;
+    font-size: 24px;
+    max-width: 90%;
 }
 
 input {
     display: block;
     margin: 0 auto;
     text-align: center;
-    height: 50px;
-    width: 500px;
-    font-size: 48px;
 }

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './App.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
+
+import { Container } from 'react-bootstrap'
 
 import { permute } from '../lib/helper'
 
@@ -10,7 +14,7 @@ export const App: React.FC = () => {
     const [value, setValue] = useState('');
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([])
-    const [expressionSolution, setExpressionSolution] = useState<Boolean>()
+    const [expressionSolution, setExpressionSolution] = useState<Boolean>(false)
 
     // TODO: should be react functional comp
     const OnChangeHandler = (e: any) => {
@@ -21,6 +25,11 @@ export const App: React.FC = () => {
         setValue(html_value)
         e.target.value = html_value 
     }
+
+    // on start
+    useEffect(() => {
+        document.body.style.backgroundColor = "#212529"
+    }, [])
 
     useEffect(() => {
         console.log('updated, ', value); 
@@ -42,7 +51,9 @@ export const App: React.FC = () => {
     return (
         <div>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
-            <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolution={expressionSolution}/>
+            <Container className="truthTableContainer">
+                <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolution={expressionSolution}/>
+            </Container>
         </div>
     )
 }
