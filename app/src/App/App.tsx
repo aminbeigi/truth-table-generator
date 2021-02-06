@@ -20,6 +20,7 @@ export const App: React.FC = () => {
     // TODO: should be react functional comp?
     const OnChangeHandler = (e: any) => {
         let html_value: string = e.target.value
+        // TODO: leading | bug
         html_value = html_value.replace(/[^a-zA-Z|&∨∧]/, '');
         html_value = html_value.replace('||', '∨');
         html_value = html_value.replace('&&', '∧');
@@ -35,34 +36,34 @@ export const App: React.FC = () => {
     useEffect(() => {
         // TODO: support stuff like qq
         const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let char_array: string[] = [];
+        let charArray: string[] | string = [];
         for (let c of value) {
-            if (!alphabet.includes(c) || char_array.includes(c)) {
+            if (!alphabet.includes(c) || charArray.includes(c)) {
                 continue;
             }
-            char_array.push(c);
+            charArray.push(c);
         }
-        const tableRows = permute(char_array.length);
+        const tableRows = permute(charArray.length);
+        // [p, q]
+        // [true, false]
 
-        let eval_string: string = '';
-        for (let c of value) {
-            if (c == '∨') {
-                eval_string += '||';
-                continue;
-            }
+        for (let bool of tableRows) {
+            console.log("Bool: ", bool)
+            let evalString: string = value;
 
-            if (c == '∧') {
-                eval_string += '&&';
-                continue;
-            }
+                evalString = evalString.replaceAll('∨', '||');
+                evalString = evalString.replaceAll('∧', '&&');
 
-            eval_string += c;
+                for (let i = 0; i < charArray.length; ++i){
+                    evalString = evalString.replaceAll(charArray[i], String(bool[i]))
+                }
+
+                console.log("evalString", evalString)
         }
 
         const expression: boolean = eval('true');
-        console.log(eval_string)
 
-        setTableHeaders(char_array);
+        setTableHeaders(charArray);
         setTableRows(tableRows)
         setExpressionSolution(true);
     }, [value]);
