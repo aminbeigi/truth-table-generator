@@ -1,5 +1,6 @@
 /* TODO remove @import*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 
 * {
     padding: 0;
@@ -12,6 +13,8 @@
 .title {
     text-align: center;
     font-size: 72px;
+    font-family: 'Major Mono Display';
+    margin-top: 125px;
 }
 
 table {

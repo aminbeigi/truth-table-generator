@@ -50,7 +50,8 @@ export const App: React.FC = () => {
     }, [value]);
 
     return (
-        <div>
+        <div className="app">
+            <h1 className="title">Truth Table Generator</h1>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
 
             {value.length === 0 
