@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap'
 
 import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
-
-import { Container } from 'react-bootstrap'
+import { Icons } from '../components/Icons/Icons'
 
 import { permute } from '../lib/helper'
 
@@ -56,10 +56,13 @@ export const App: React.FC = () => {
             {value.length === 0 
                 ? ''
                 :
-                    <Container className="truthTableContainer">
+                    <Container className="truth-table-container">
                         <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolution={expressionSolution}/>
                     </Container>
             }
+            <div className="icon-container">
+                <Icons />
+            </div>
         </div>
     )
 }

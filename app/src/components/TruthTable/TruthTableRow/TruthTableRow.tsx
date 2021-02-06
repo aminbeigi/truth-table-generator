@@ -6,7 +6,6 @@ interface Props {
 }
 
 export const TruthTableRow: React.FC<Props> = ({tableRow, expressionSolution}) => {
-    const test = true;
     return (
         <tr>
             {tableRow.map(tableData => { 

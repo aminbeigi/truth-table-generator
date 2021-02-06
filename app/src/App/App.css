@@ -1,7 +1,6 @@
 /* TODO remove @import*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-
 * {
     padding: 0;
     margin: 0;
@@ -29,4 +28,10 @@ table {
 input {
     max-width:720px;
     text-align: center;
+}
+
+.icon-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
