@@ -36,14 +36,14 @@ export const App: React.FC = () => {
     useEffect(() => {
         // TODO: support stuff like qq
         const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let charArray: string[] | string = [];
+        let operandArray: string[] | string = [];
         for (let c of value) {
-            if (!alphabet.includes(c) || charArray.includes(c)) {
+            if (!alphabet.includes(c) || operandArray.includes(c)) {
                 continue;
             }
-            charArray.push(c);
+            operandArray.push(c);
         }
-        const tableRows = permute(charArray.length);
+        const tableRows = permute(operandArray.length);
 
         let expressionSolutionArray: Boolean[] = [];
         for (let boolArray of tableRows) {
@@ -56,14 +56,14 @@ export const App: React.FC = () => {
             evalString = evalString.replaceAll('∨', '||');
             evalString = evalString.replaceAll('∧', '&&');
 
-            for (let i = 0; i < charArray.length; ++i){
+            for (let i = 0; i < operandArray.length; ++i){
                 bool = boolArray[i]
                 if (bool){
                     boolStr = '1';
                 } else {
                     boolStr = '0';
                 }
-                evalString = evalString.replaceAll(charArray[i], boolStr)
+                evalString = evalString.replaceAll(operandArray[i], boolStr)
 
                 try {
                     let expression: number = eval(evalString);
@@ -82,7 +82,7 @@ export const App: React.FC = () => {
         }
 
         //let temp = [true, false, true, false];
-        setTableHeaders(charArray);
+        setTableHeaders(operandArray);
         setTableRows(tableRows)
         setExpressionSolutions(expressionSolutionArray);
     }, [value]);
