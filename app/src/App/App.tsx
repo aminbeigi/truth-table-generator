@@ -21,7 +21,7 @@ export const App: React.FC = () => {
     const OnChangeHandler = (e: any) => {
         let html_value: string = e.target.value
         // TODO: leading | bug
-        html_value = html_value.replace(/[^a-zA-Z|&∨∧]/, '');
+        html_value = html_value.replace(/[^a-zA-Z|&∨∧()!]/, '');
         html_value = html_value.replace('||', '∨');
         html_value = html_value.replace('&&', '∧');
         setValue(html_value)
@@ -47,6 +47,8 @@ export const App: React.FC = () => {
         // [p, q]
         // [true, false]
 
+
+        let expressionSolutionArray: Boolean[] = [];
         for (let boolArray of tableRows) {
             console.log(boolArray)
 
@@ -65,7 +67,19 @@ export const App: React.FC = () => {
                     boolStr = '0';
                 }
                 evalString = evalString.replaceAll(charArray[i], boolStr)
-                let expression: number = eval('true');
+
+                try {
+                    let expression: number = eval(evalString);
+                    if (expression === 1) {
+                        expressionSolutionArray.push(true);
+                    } else {
+                        expressionSolutionArray.push(false);
+                    }
+                } catch (e) {
+                    console.log('skip... ' + e)
+                    //return;
+                }
+
             }
 
                 console.log("evalString", evalString)
@@ -74,7 +88,7 @@ export const App: React.FC = () => {
         let temp = [true, false, true, false];
         setTableHeaders(charArray);
         setTableRows(tableRows)
-        setExpressionSolutions(temp);
+        setExpressionSolutions(expressionSolutionArray);
     }, [value]);
 
     return (
