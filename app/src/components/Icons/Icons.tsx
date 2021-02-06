@@ -22,13 +22,13 @@ export const Icons: React.FC = () => {
 
                     <ul>
                         <li>
-                            Negation: !
-                        </li>
-                        <li>
                             And: &&
                         </li>
                         <li>
                             Or: ||
+                        </li>
+                        <li>
+                            Negation: !
                         </li>
                     </ul>
                 </Modal.Body>
