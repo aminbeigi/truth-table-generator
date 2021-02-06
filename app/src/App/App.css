@@ -1,9 +1,13 @@
+/* TODO remove @import*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    overflow: hidden;
     color:white;
+    font-family: 'Roboto';
 }
 
 .title {
@@ -18,8 +22,11 @@ table {
     max-width: 90%;
 }
 
+.input-group {
+    justify-content: center;
+}
+
 input {
-    display: block;
-    margin: 0 auto;
+    max-width:720px;
     text-align: center;
 }
