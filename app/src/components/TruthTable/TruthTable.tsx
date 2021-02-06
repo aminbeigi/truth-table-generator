@@ -18,7 +18,7 @@ export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression
 
     return (
         <div>
-            <Table striped bordered>
+            <Table bordered>
                 <thead>
                     <tr>
                         {tableHeaders.map(tableHeader => { 

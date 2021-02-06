@@ -18,7 +18,7 @@ export const TruthTableRow: React.FC<Props> = ({tableRow, expressionSolution}) =
                     )})
                 }
                             
-            {expressionSolution
+            { expressionSolution
                 ? <td>T</td>
                 : <td>F</td>}
 
