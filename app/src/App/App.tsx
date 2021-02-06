@@ -15,7 +15,7 @@ export const App: React.FC = () => {
     const [value, setValue] = useState('');
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
-    const [expressionSolution, setExpressionSolution] = useState<Boolean>(false);
+    const [expressionSolutions, setExpressionSolutions] = useState<Boolean>(false);
 
     // TODO: should be react functional comp?
     const OnChangeHandler = (e: any) => {
@@ -47,25 +47,34 @@ export const App: React.FC = () => {
         // [p, q]
         // [true, false]
 
-        for (let bool of tableRows) {
-            console.log("Bool: ", bool)
+        for (let boolArray of tableRows) {
+            console.log(boolArray)
+
+            let boolStr: string;
+            let bool: boolean;
             let evalString: string = value;
 
-                evalString = evalString.replaceAll('∨', '||');
-                evalString = evalString.replaceAll('∧', '&&');
+            evalString = evalString.replaceAll('∨', '||');
+            evalString = evalString.replaceAll('∧', '&&');
 
-                for (let i = 0; i < charArray.length; ++i){
-                    evalString = evalString.replaceAll(charArray[i], String(bool[i]))
+            for (let i = 0; i < charArray.length; ++i){
+                bool = boolArray[i]
+                if (bool){
+                    boolStr = '1';
+                } else {
+                    boolStr = '0';
                 }
+                evalString = evalString.replaceAll(charArray[i], boolStr)
+                let expression: number = eval('true');
+            }
 
                 console.log("evalString", evalString)
         }
 
-        const expression: boolean = eval('true');
-
+        let temp = [true, false, true, false];
         setTableHeaders(charArray);
         setTableRows(tableRows)
-        setExpressionSolution(true);
+        setExpressionSolutions(temp);
     }, [value]);
 
     return (
@@ -77,7 +86,7 @@ export const App: React.FC = () => {
                 ? ''
                 :
                     <Container className="truth-table-container">
-                        <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolution={expressionSolution}/>
+                        <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolutions={expressionSolutions}/>
                     </Container>
             }
             <div className="icon-container">
