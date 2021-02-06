@@ -8,10 +8,11 @@ import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
 import { Icons } from '../components/Icons/Icons'
 
-import { permute } from '../lib/helper'
+import { permute } from '../shared/helper'
 
 export const App: React.FC = () => {
     // TODO: give undefined type
+    // TODO: wrong font loads on startup - wait till font loads
     const [value, setValue] = useState('');
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
@@ -35,6 +36,7 @@ export const App: React.FC = () => {
 
     useEffect(() => {
         // TODO: support stuff like qq
+
         const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         let operandArray: string[] | string = [];
         for (let c of value) {
@@ -43,11 +45,24 @@ export const App: React.FC = () => {
             }
             operandArray.push(c);
         }
+        //console.log('operandArray: ', operandArray)
+
+       /*
+        const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let operandArray: string[] | string = [];
+        for (let c of value) {
+            if (!alphabet.includes(c) || operandArray.includes(c)) {
+                continue;
+            }
+            operandArray.push(c);
+        }
+        console.log(operandArray)
+        */
+
         const tableRows = permute(operandArray.length);
 
         let expressionSolutionArray: Boolean[] = [];
         for (let boolArray of tableRows) {
-            console.log(boolArray)
 
             let boolStr: string;
             let bool: boolean;
@@ -56,15 +71,17 @@ export const App: React.FC = () => {
             evalString = evalString.replaceAll('∨', '||');
             evalString = evalString.replaceAll('∧', '&&');
 
-            for (let i = 0; i < operandArray.length; ++i){
+            for (let i = 0; i < operandArray.length; ++i) {
                 bool = boolArray[i]
                 if (bool){
                     boolStr = '1';
                 } else {
                     boolStr = '0';
                 }
-                evalString = evalString.replaceAll(operandArray[i], boolStr)
+                evalString = evalString.replaceAll(operandArray[i], boolStr);
+            }
 
+                console.log('evalString: ' + evalString);
                 try {
                     let expression: number = eval(evalString);
                     // eval() will sometimes return bool true instead of number 1??
@@ -75,10 +92,10 @@ export const App: React.FC = () => {
                     }
                 } catch (e) {
                     console.log('skip... ' + e)
-                    //return;
+                    // TODO: don't show input until finalise
                 }
 
-            }
+            
         }
 
         //let temp = [true, false, true, false];
