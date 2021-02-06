@@ -44,9 +44,6 @@ export const App: React.FC = () => {
             charArray.push(c);
         }
         const tableRows = permute(charArray.length);
-        // [p, q]
-        // [true, false]
-
 
         let expressionSolutionArray: Boolean[] = [];
         for (let boolArray of tableRows) {
@@ -70,9 +67,10 @@ export const App: React.FC = () => {
 
                 try {
                     let expression: number = eval(evalString);
-                    if (expression === 1) {
+                    // eval() will sometimes return bool true instead of number 1??
+                    if (expression === 1 || expression) {
                         expressionSolutionArray.push(true);
-                    } else {
+                    } else if (expression === 0 || expression) {
                         expressionSolutionArray.push(false);
                     }
                 } catch (e) {
@@ -81,8 +79,6 @@ export const App: React.FC = () => {
                 }
 
             }
-
-                console.log("evalString", evalString)
         }
 
         //let temp = [true, false, true, false];
