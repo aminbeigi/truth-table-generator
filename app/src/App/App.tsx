@@ -15,7 +15,7 @@ export const App: React.FC = () => {
     const [value, setValue] = useState('');
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
-    const [expressionSolutions, setExpressionSolutions] = useState<Boolean>(false);
+    const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
 
     // TODO: should be react functional comp?
     const OnChangeHandler = (e: any) => {
