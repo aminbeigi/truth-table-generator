@@ -79,7 +79,7 @@ button {
 }
 
 .modal-title,
-.modal-body {
+.modal-body > p{
     color: black !important;
 }
 

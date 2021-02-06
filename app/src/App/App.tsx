@@ -36,7 +36,7 @@ export const App: React.FC = () => {
 
     useEffect(() => {
         // TODO: support stuff like qq
-        // TODO: ! dont work
+
 
         const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         let operandArray: string[] | string = [];

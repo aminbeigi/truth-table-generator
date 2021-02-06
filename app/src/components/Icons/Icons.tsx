@@ -18,8 +18,8 @@ export const Icons: React.FC = () => {
                     <Modal.Title>Help</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Enter an expression in the input box to get started.
-                    Valid operators:
+                    <p>Enter an expression in the input box to get started.</p>
+                    <p>Valid operators:</p>
 
                     <ul>
                         <li>
