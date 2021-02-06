@@ -1,10 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Modal, Button } from 'react-bootstrap'
 
 export const Icons: React.FC = () => {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
-        <div>
-            <div><i className="fab fa-github"></i></div>
-            <div><i className="far fa-question-circle"></i></div>
-        </div> 
+        <>
+            <div><button onClick={() => window.open('https://github.com/aminbeigi/truth-table-generator')}><i className="fab fa-github"></i></button></div>
+            <div><button onClick={handleShow}><i className="far fa-question-circle"></i></button></div>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Help</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Enter an expression in the input box to get started.
+                    Available operators:
+
+                    <ul>
+                        <li>
+                            Negation: !
+                        </li>
+                        <li>
+                            And: &&
+                        </li>
+                        <li>
+                            Or: ||
+                        </li>
+                    </ul>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>
+                        Close 
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     )
 }
