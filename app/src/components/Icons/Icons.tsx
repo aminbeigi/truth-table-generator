@@ -18,7 +18,7 @@ export const Icons: React.FC = () => {
                 </Modal.Header>
                 <Modal.Body>
                     Enter an expression in the input box to get started.
-                    Available operators:
+                    Valid operators:
 
                     <ul>
                         <li>
