@@ -54,7 +54,7 @@ export const App: React.FC = () => {
             <h1 className="title">Truth Table Generator</h1>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
 
-            {value.length === 0 
+            { value.length === 0 
                 ? ''
                 :
                     <Container className="truth-table-container">
