@@ -36,50 +36,33 @@ export const App: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        // TODO: support stuff like qq
+        // TODO: ternary operator here
+        // TODO: add helper functions
 
         let operandArray: string[] | string = [];
         let operand: string = '';
         for (let c of value) {
             // TODO: add helper functions
-            console.log("stack: ", operandArray)
-            if (c === '|' || c === '&') {
-                continue;
+            console.log("stack BEFORE: ", operandArray)
+            
+            if (c === '|' || c === '&' || c === '!' || c === '(' || c === ')') {
+                // pass;
             }
-            if (c === '∨' || c === '∧') {
-                //operandArray.push(operand);
-                let pair = operandArray.slice(-2);
-                if (pair[0] === pair[1]) {
+            else if (c === '∨' || c === '∧') {
+
+                operand = '';
+            }
+            else { 
+                if (operand.length !== 0) {
                     operandArray.pop();
                 }
-                operand = '';
-                continue;
-            }
-            operand += c;
-            // TODO: ternary operator here
-            if (operand.length > 1) {
-                operandArray.pop();
+                operand += c;
+                operandArray.push(operand);
             } 
 
-            if (operandArray.includes(operand)) {
-                console.log("stack after: ", operandArray)
-                continue;
-            }
-            operandArray.push(operand);
-            console.log("stack after: ", operandArray)
+            console.log("stack AFTER: ", operandArray)
         }
 
-       /*
-        const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let operandArray: string[] | string = [];
-        for (let c of value) {
-            if (!alphabet.includes(c) || operandArray.includes(c)) {
-                continue;
-            }
-            operandArray.push(c);
-        }
-        console.log(operandArray)
-        */
 
         const tableRows = permute(operandArray.length);
 
