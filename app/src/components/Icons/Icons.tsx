@@ -18,12 +18,13 @@ export const Icons: React.FC = () => {
                     <Modal.Title>Help</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <p>This tool generates truth tables for propositional logic formulas.</p>
+                    <p>For example, the formula p ∧ q  could be written as p || q, as p.</p>
                     <p>Enter an expression in the input box to get started.</p>
                     <p>Valid operators:</p>
-
                     <ul>
                         <li>
-                            And: &&
+                            And: &amp;&amp;
                         </li>
                         <li>
                             Or: ||

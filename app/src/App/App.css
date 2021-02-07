@@ -60,7 +60,7 @@ input {
 .fa-question-circle {
     transition: all .2s ease-in-out; 
     padding: 15px;
-    font-size: 50px;
+    font-size: 75px;
 }
 
 .fa-github:hover,
@@ -81,6 +81,11 @@ button {
 .modal-title,
 .modal-body > p{
     color: black !important;
+    margin: 4px;
+}
+
+.close > span {
+    color: red;
 }
 
 .modal-body ul {

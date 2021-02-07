@@ -40,6 +40,7 @@ export const App: React.FC = () => {
         // TODO: ternary operator here(?)
         // TODO: add helper functions
         if (value.length === 0) {
+            setValidValue(false);
             return;
         }
         let operandArray: string[]|string = [];
@@ -105,10 +106,8 @@ export const App: React.FC = () => {
                     setValidValue(true)
                 } catch (e) {
                     console.log('skip... ' + e)
-                    setValidValue(false);
+                    setValidValue(false)
                 }
-
-            
         }
 
         //let temp = [true, false, true, false];
