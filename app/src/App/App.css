@@ -1,7 +1,6 @@
 /* TODO remove @import?*/
-/* TODO back ups fonts*/
+/* TODO: wait till apge load*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 
 * {
     padding: 0;
