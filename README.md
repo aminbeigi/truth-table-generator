@@ -1,7 +1,7 @@
 <p align="center">
-<img src="app/public/icon.png"/>
+<img src="app/public/icon.png" width="128px" height="128px"/>
 <br/>
-<h3 align="center" width="128" height="128">Truth Table Generator</h3>
+<h3 align="center">Truth Table Generator</h3>
 <p align="center">...</p>
 <h2></h2>
 </p>
