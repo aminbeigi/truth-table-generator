@@ -17,18 +17,22 @@ export const App: React.FC = () => {
     // TODO: less bulky font
     // TODO: icon click
     const [value, setValue] = useState<string>('');
-    const [validValue, setValidValue] = useState<Boolean>();
+    const [emptyValue, setEmptyValue] = useState<Boolean>();
+    const [invalidValue, setInvalidValue] = useState<string>('');
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
 
     // TODO: should be react functional comp?
+    // TODO: wot the hell is e
+    // TODO: catch illegal characters
     const OnChangeHandler = (e: any) => {
         let html_value: string = e.target.value
         // TODO: leading | bug
-        html_value = html_value.replace(/[^a-zA-Z|&∨∧()!@]/, '');
+        html_value = html_value.replace(/[^a-zA-Z|&∨∧¬()!]/, '');
         html_value = html_value.replace('||', '∨');
-        html_value = html_value.replace('&&', '∧');
+        html_value = html_value.replace('&', '∧');
+        html_value = html_value.replace('!', '¬');
         setValue(html_value)
         e.target.value = html_value 
     }
@@ -42,16 +46,17 @@ export const App: React.FC = () => {
         // TODO: ternary operator here(?)
         // TODO: add helper functions
         if (value.length === 0) {
-            setValidValue(false);
+            setEmptyValue(false);
             return;
         }
+        setEmptyValue(true);
         let operandArray: string[]|string = [];
         let operand: string = '';
         for (let c of value) {
             // TODO: add helper functions
-            console.log("stack BEFORE: ", operandArray)
+            //console.log("stack BEFORE: ", operandArray)
             
-            if (c === '|' || c === '&' || c === '!' || c === '(' || c === ')') {
+            if (c === '|' || c === '&' || c === '¬' || c === '(' || c === ')') {
                 // pass;
             }
             else if (c === '∨' || c === '∧') {
@@ -71,7 +76,7 @@ export const App: React.FC = () => {
                 }
             } 
 
-            console.log("stack AFTER: ", operandArray)
+            //console.log("stack AFTER: ", operandArray)
         }
 
         operandArray = remove(operandArray, '');
@@ -86,6 +91,7 @@ export const App: React.FC = () => {
 
             evalString = evalString.replaceAll('∨', '||');
             evalString = evalString.replaceAll('∧', '&&');
+            evalString = evalString.replaceAll('¬', '!');
 
             for (let i = 0; i < operandArray.length; ++i) {
                 bool = boolArray[i]
@@ -98,9 +104,7 @@ export const App: React.FC = () => {
             }
 
                 try {
-                    console.log(evalString)
                     let expression: number = parse(evalString);
-                    console.log(expression)
                     // eval() will sometimes return bool true instead of number 1??
                     // TODO: doesn't work when === ?
                     if (expression == 1 || expression) {
@@ -108,10 +112,10 @@ export const App: React.FC = () => {
                     } else if (expression == 0 || expression) {
                         expressionSolutionArray.push(false);
                     }
-                    setValidValue(true)
+                    setInvalidValue('')
                 } catch (e) {
                     console.log('skip... ' + e)
-                    setValidValue(false)
+                    setInvalidValue('invalid input')
                 }
         }
 
@@ -125,9 +129,12 @@ export const App: React.FC = () => {
             <h1 className="title">Truth Table Generator</h1>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
 
-            { !validValue
+            { !emptyValue
                 ? ''
                 :
+                invalidValue
+                    ? 'asdfjlk' 
+                    :   
                     <Container className="truth-table-container">
                         <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolutions={expressionSolutions}/>
                     </Container>
