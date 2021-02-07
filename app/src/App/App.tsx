@@ -11,11 +11,10 @@ import { Icons } from '../components/Icons/Icons'
 import { permute, remove } from '../shared/helper'
 
 export const App: React.FC = () => {
-    // TODO: give undefined type
     // TODO: wrong font loads on startup - wait till font loads
     // TODO: write own eval function
     const [value, setValue] = useState<string>('');
-    const [validValue, setValidExpression] = useState<Boolean>();
+    const [validValue, setValidValue] = useState<Boolean>();
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
@@ -39,7 +38,9 @@ export const App: React.FC = () => {
     useEffect(() => {
         // TODO: ternary operator here(?)
         // TODO: add helper functions
-
+        if (value.length === 0) {
+            return;
+        }
         let operandArray: string[]|string = [];
         let operand: string = '';
         for (let c of value) {
@@ -101,8 +102,10 @@ export const App: React.FC = () => {
                     } else if (expression === 0 || expression) {
                         expressionSolutionArray.push(false);
                     }
+                    setValidValue(true)
                 } catch (e) {
                     console.log('skip... ' + e)
+                    setValidValue(false);
                 }
 
             
@@ -119,7 +122,7 @@ export const App: React.FC = () => {
             <h1 className="title">Truth Table Generator</h1>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
 
-            { value.length === 0
+            { !validValue
                 ? ''
                 :
                     <Container className="truth-table-container">
