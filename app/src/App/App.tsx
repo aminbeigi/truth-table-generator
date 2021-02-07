@@ -102,6 +102,7 @@ export const App: React.FC = () => {
                     let expression: number = parse(evalString);
                     console.log(expression)
                     // eval() will sometimes return bool true instead of number 1??
+                    // TODO: doesn't work when === ?
                     if (expression == 1 || expression) {
                         expressionSolutionArray.push(true);
                     } else if (expression == 0 || expression) {
