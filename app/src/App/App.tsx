@@ -14,6 +14,8 @@ export const App: React.FC = () => {
     // TODO: wrong font loads on startup - wait till font loads
     // TODO: write own eval function
     // TODO: better description
+    // TODO: less bulky font
+    // TODO: icon click
     const [value, setValue] = useState<string>('');
     const [validValue, setValidValue] = useState<Boolean>();
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
@@ -47,7 +49,7 @@ export const App: React.FC = () => {
         let operand: string = '';
         for (let c of value) {
             // TODO: add helper functions
-            //console.log("stack BEFORE: ", operandArray)
+            console.log("stack BEFORE: ", operandArray)
             
             if (c === '|' || c === '&' || c === '!' || c === '(' || c === ')') {
                 // pass;
@@ -69,7 +71,7 @@ export const App: React.FC = () => {
                 }
             } 
 
-            //console.log("stack AFTER: ", operandArray)
+            console.log("stack AFTER: ", operandArray)
         }
 
         operandArray = remove(operandArray, '');
@@ -96,11 +98,13 @@ export const App: React.FC = () => {
             }
 
                 try {
+                    console.log(evalString)
                     let expression: number = parse(evalString);
+                    console.log(expression)
                     // eval() will sometimes return bool true instead of number 1??
-                    if (expression === 1 || expression) {
+                    if (expression == 1 || expression) {
                         expressionSolutionArray.push(true);
-                    } else if (expression === 0 || expression) {
+                    } else if (expression == 0 || expression) {
                         expressionSolutionArray.push(false);
                     }
                     setValidValue(true)
@@ -110,7 +114,6 @@ export const App: React.FC = () => {
                 }
         }
 
-        //let temp = [true, false, true, false];
         setTableHeaders(operandArray);
         setTableRows(tableRows)
         setExpressionSolutions(expressionSolutionArray);
