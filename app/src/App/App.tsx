@@ -60,6 +60,11 @@ export const App: React.FC = () => {
             if (operand.length > 1) {
                 operandArray.pop();
             } 
+
+            if (operandArray.includes(operand)) {
+                console.log("stack after: ", operandArray)
+                continue;
+            }
             operandArray.push(operand);
             console.log("stack after: ", operandArray)
         }
