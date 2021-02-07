@@ -13,6 +13,7 @@ import { permute } from '../shared/helper'
 export const App: React.FC = () => {
     // TODO: give undefined type
     // TODO: wrong font loads on startup - wait till font loads
+    // TODO: write own eval function
     const [value, setValue] = useState('');
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
@@ -37,16 +38,24 @@ export const App: React.FC = () => {
     useEffect(() => {
         // TODO: support stuff like qq
 
-
-        const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         let operandArray: string[] | string = [];
+        let operand: string = '';
         for (let c of value) {
-            if (!alphabet.includes(c) || operandArray.includes(c)) {
+            if (c === '|' || c === '&') {
                 continue;
             }
-            operandArray.push(c);
+            if (c === '∨' || c === '∧') {
+                //operandArray.push(operand);
+                operand = '';
+                continue;
+            }
+            operand += c;
+            // TODO: ternary operator here
+            if (operand.length > 1) {
+                operandArray.pop();
+            } 
+            operandArray.push(operand);
         }
-        //console.log('operandArray: ', operandArray)
 
        /*
         const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
