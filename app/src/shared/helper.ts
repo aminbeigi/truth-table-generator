@@ -23,3 +23,7 @@ export const permute = (n: number): boolean[][] => {
 export const remove = (array: string[], value: string): string[] => {
     return array.filter(i => i !== value);
 }
+
+export const parse = (str: string): number => {
+    return Function(`'use strict'; return (${str})`)()
+}

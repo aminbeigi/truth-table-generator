@@ -8,11 +8,12 @@ import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
 import { Icons } from '../components/Icons/Icons'
 
-import { permute, remove } from '../shared/helper'
+import { permute, remove, parse } from '../shared/helper'
 
 export const App: React.FC = () => {
     // TODO: wrong font loads on startup - wait till font loads
     // TODO: write own eval function
+    // TODO: better description
     const [value, setValue] = useState<string>('');
     const [validValue, setValidValue] = useState<Boolean>();
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
@@ -23,7 +24,7 @@ export const App: React.FC = () => {
     const OnChangeHandler = (e: any) => {
         let html_value: string = e.target.value
         // TODO: leading | bug
-        html_value = html_value.replace(/[^a-zA-Z|&∨∧()!]/, '');
+        html_value = html_value.replace(/[^a-zA-Z|&∨∧()!@]/, '');
         html_value = html_value.replace('||', '∨');
         html_value = html_value.replace('&&', '∧');
         setValue(html_value)
@@ -45,7 +46,7 @@ export const App: React.FC = () => {
         let operand: string = '';
         for (let c of value) {
             // TODO: add helper functions
-            console.log("stack BEFORE: ", operandArray)
+            //console.log("stack BEFORE: ", operandArray)
             
             if (c === '|' || c === '&' || c === '!' || c === '(' || c === ')') {
                 // pass;
@@ -67,7 +68,7 @@ export const App: React.FC = () => {
                 }
             } 
 
-            console.log("stack AFTER: ", operandArray)
+            //console.log("stack AFTER: ", operandArray)
         }
 
         operandArray = remove(operandArray, '');
@@ -93,9 +94,8 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(operandArray[i], boolStr);
             }
 
-                //console.log('evalString: ' + evalString);
                 try {
-                    let expression: number = eval(evalString);
+                    let expression: number = parse(evalString);
                     // eval() will sometimes return bool true instead of number 1??
                     if (expression === 1 || expression) {
                         expressionSolutionArray.push(true);
