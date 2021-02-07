@@ -14,7 +14,8 @@ export const App: React.FC = () => {
     // TODO: give undefined type
     // TODO: wrong font loads on startup - wait till font loads
     // TODO: write own eval function
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState<string>('');
+    const [validValue, setValidExpression] = useState<Boolean>();
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
@@ -101,8 +102,7 @@ export const App: React.FC = () => {
                         expressionSolutionArray.push(false);
                     }
                 } catch (e) {
-                    //console.log('skip... ' + e)
-                    // TODO: don't show input until finalise
+                    console.log('skip... ' + e)
                 }
 
             
@@ -119,7 +119,7 @@ export const App: React.FC = () => {
             <h1 className="title">Truth Table Generator</h1>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
 
-            { value.length === 0 
+            { value.length === 0
                 ? ''
                 :
                     <Container className="truth-table-container">
