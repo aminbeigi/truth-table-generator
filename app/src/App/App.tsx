@@ -104,6 +104,10 @@ export const App: React.FC = () => {
             }
 
                 try {
+                    let regex = /[^a-zA-z10|&!]/ig;
+                    if (regex.test(evalString)) {
+                        throw 'Error: illegal character';
+                    }
                     let expression: number = parse(evalString);
                     // eval() will sometimes return bool true instead of number 1??
                     // TODO: doesn't work when === ?
@@ -115,7 +119,11 @@ export const App: React.FC = () => {
                     setInvalidValue('')
                 } catch (e) {
                     console.log('skip... ' + e)
-                    setInvalidValue('invalid input')
+                    if (e == 'Error: illegal character') {
+                        setInvalidValue('illegal char')
+                    } else {
+                        setInvalidValue('invalid input')
+                    }
                 }
         }
 
@@ -133,7 +141,7 @@ export const App: React.FC = () => {
                 ? ''
                 :
                 invalidValue
-                    ? 'asdfjlk' 
+                    ? invalidValue
                     :   
                     <Container className="truth-table-container">
                         <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolutions={expressionSolutions}/>
