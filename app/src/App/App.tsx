@@ -8,7 +8,7 @@ import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
 import { Icons } from '../components/Icons/Icons'
 
-import { permute } from '../shared/helper'
+import { permute, remove } from '../shared/helper'
 
 export const App: React.FC = () => {
     // TODO: give undefined type
@@ -36,10 +36,10 @@ export const App: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        // TODO: ternary operator here
+        // TODO: ternary operator here(?)
         // TODO: add helper functions
 
-        let operandArray: string[] | string = [];
+        let operandArray: string[]|string = [];
         let operand: string = '';
         for (let c of value) {
             // TODO: add helper functions
@@ -49,21 +49,26 @@ export const App: React.FC = () => {
                 // pass;
             }
             else if (c === '∨' || c === '∧') {
-
                 operand = '';
             }
             else { 
-                if (operand.length !== 0) {
+                operand += c;
+
+                if (operand.length > 1) {
                     operandArray.pop();
                 }
-                operand += c;
-                operandArray.push(operand);
+
+                if (operandArray.includes(operand)) {
+                    operandArray.push('');
+                } else {
+                    operandArray.push(operand);
+                }
             } 
 
             console.log("stack AFTER: ", operandArray)
         }
 
-
+        operandArray = remove(operandArray, '');
         const tableRows = permute(operandArray.length);
 
         let expressionSolutionArray: Boolean[] = [];

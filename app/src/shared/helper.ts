@@ -17,6 +17,9 @@ export const permute = (n: number): boolean[][] => {
         
         outputArray.push(boolArray);
     }
-    //console.log(outputArray)
     return outputArray;
+}
+
+export const remove = (array: string[], value: string): string[] => {
+    return array.filter(i => i !== value);
 }
