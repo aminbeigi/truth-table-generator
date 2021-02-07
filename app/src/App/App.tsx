@@ -41,11 +41,17 @@ export const App: React.FC = () => {
         let operandArray: string[] | string = [];
         let operand: string = '';
         for (let c of value) {
+            // TODO: add helper functions
+            console.log("stack: ", operandArray)
             if (c === '|' || c === '&') {
                 continue;
             }
             if (c === '∨' || c === '∧') {
                 //operandArray.push(operand);
+                let pair = operandArray.slice(-2);
+                if (pair[0] === pair[1]) {
+                    operandArray.pop();
+                }
                 operand = '';
                 continue;
             }
@@ -55,6 +61,7 @@ export const App: React.FC = () => {
                 operandArray.pop();
             } 
             operandArray.push(operand);
+            console.log("stack after: ", operandArray)
         }
 
        /*
@@ -91,7 +98,7 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(operandArray[i], boolStr);
             }
 
-                console.log('evalString: ' + evalString);
+                //console.log('evalString: ' + evalString);
                 try {
                     let expression: number = eval(evalString);
                     // eval() will sometimes return bool true instead of number 1??
@@ -101,7 +108,7 @@ export const App: React.FC = () => {
                         expressionSolutionArray.push(false);
                     }
                 } catch (e) {
-                    console.log('skip... ' + e)
+                    //console.log('skip... ' + e)
                     // TODO: don't show input until finalise
                 }
 
