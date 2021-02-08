@@ -15,7 +15,8 @@ export const App: React.FC = () => {
     // TODO: wrong font loads on startup - wait till font loads
     // TODO: write own eval function
     // TODO: better description
-    // TODO: icon click
+    // TODO: icon middle click
+    // TODO: export default vs export
     const [value, setValue] = useState<string>('');
     const [emptyValue, setEmptyValue] = useState<Boolean>();
     const [invalidValue, setInvalidValue] = useState<string>('');
@@ -114,10 +115,12 @@ export const App: React.FC = () => {
                     console.log(evalString)
                     // TODO: regexp dont work for unicode
 
+                    /*
                     const regex = /(\w)\|(\w)/g;
                     if (regex.test(evalString)) {
                         throw 'Error: missing operand';
                     }
+                    */
 
                     //let regex = /[^a-zA-z10!\x00-\x7F]/ig;
                     const regex1 = /[^10|&!]/g;

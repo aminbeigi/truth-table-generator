@@ -1,5 +1,5 @@
 import React from 'react'
-import {ErrorMessageDiv} from './styled'
+import { Wrapper, SyntaxOkay, SyntaxBad, ErrorMessageText } from './styled'
 
 interface Props { 
     errorMessage: string;
@@ -8,10 +8,10 @@ interface Props {
 
 export const ErrorMessage: React.FC<Props> = ({errorMessage, value}) => {
     return (
-        <ErrorMessageDiv className="error-message">
-            <h2>{value}</h2>
-            <p>{errorMessage}</p>
-        </ErrorMessageDiv>
+        <Wrapper>
+            <SyntaxOkay>{value}<SyntaxBad>blah</SyntaxBad></SyntaxOkay>
+            <ErrorMessageText>{errorMessage}</ErrorMessageText>
+        </Wrapper>
     )
 }
 
