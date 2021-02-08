@@ -9,7 +9,7 @@ export const ErrorMessage: React.FC<Props> = ({errorObject}) => {
     let value = errorObject['value'];
     let index = errorObject['index'];
     let operator = value[index];
-    let array = value.split(operator);
+    const array = [value.slice(0,index), value.slice(index+1)]; // only slice first occurence
     console.log('value: ', value)
     console.log('index: ', index)
     console.log(array)

@@ -23,7 +23,7 @@ export const App: React.FC = () => {
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
-    const [errorObject, setErrorObject] = useState({});
+    const [errorObject, setErrorObject] = useState<any>({});
 
     // TODO: use this
     //const [state, setState] = useState({
@@ -60,8 +60,13 @@ export const App: React.FC = () => {
             return;
         }
         setEmptyValue(true);
-
+        // TODO: Add more operand error checking
         try {
+            const illegalOperandRegex = /(\W)(∧|∨)|(∧|∨)(\W)|(∧|∨)$/g;
+            if (illegalOperandRegex.test(value)) {
+                throw "The operator is missing an operand.";
+            } 
+            
             const illegalOrRegex = /[/|]/g;
             if (illegalOrRegex.test(value)) {
                 throw "Error: illegal | character";
@@ -74,14 +79,18 @@ export const App: React.FC = () => {
 
 
         } catch (e) {
-            if (e === "Error: illegal | character") {
-                setInvalidValue('illegal character');
+            if (e === "The operator is missing an operand.") {
+                const illegalOperandRegex = /(\W)(∧|∨)|(∧|∨)(\W)|(∧|∨)$/g;
+                const index = value.search(illegalOperandRegex);
+                setErrorObject({'error': e, 'value': value, 'index': index})
+            }
+            else if (e === "Error: illegal | character") {
                 setErrorObject({'error': e, 'value': value, 'index': value.indexOf('|')})
             }
             else if (e === "Error: illegal & character") {
-                setInvalidValue('illegal character');
                 setErrorObject({'error': e, 'value': value, 'index': value.indexOf('&')})
             }
+            setInvalidValue('temp');
             console.log("Above catch statement: ", e);
             return;
         }
@@ -148,13 +157,6 @@ export const App: React.FC = () => {
                     }
                     */
 
-                    //let regex = /[^a-zA-z10!\x00-\x7F]/ig;
-                    /*
-                    const illegalCharRegex = /[^10||&&!]/g;
-                    if (illegalCharRegex.test(evalString)) {
-                        throw 'Error: illegal character';
-                    }
-                    */
 
                     let expression: number = parse(evalString);
                     // eval() will sometimes return bool true instead of number 1??
