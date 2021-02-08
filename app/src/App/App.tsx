@@ -32,7 +32,7 @@ export const App: React.FC = () => {
         // block all none ascii characters
         html_value = html_value.replace(/[^\x00-\x7F∨∧¬]/ig, '');
         html_value = html_value.replace('||', '∨');
-        html_value = html_value.replace('&', '∧');
+        html_value = html_value.replace('&&', '∧');
         html_value = html_value.replace('!', '¬');
         setValue(html_value)
         e.target.value = html_value 
