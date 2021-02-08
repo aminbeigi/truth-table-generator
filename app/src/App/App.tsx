@@ -113,15 +113,15 @@ export const App: React.FC = () => {
                 try {
                     console.log(evalString)
                     // TODO: regexp dont work for unicode
-                    //let regex = /[^a-zA-z10!\x00-\x7F]/ig;
 
-                    const regex1 = /(\w)\|(\w)/;
-                    if (regex1.test(evalString)) {
+                    const regex = /(\w)\|(\w)/g;
+                    if (regex.test(evalString)) {
                         throw 'Error: missing operand';
                     }
 
-                    const regex = /[^10|&!]/g;
-                    if (regex.test(evalString)) {
+                    //let regex = /[^a-zA-z10!\x00-\x7F]/ig;
+                    const regex1 = /[^10|&!]/g;
+                    if (regex1.test(evalString)) {
                         throw 'Error: illegal character';
                     }
 
@@ -139,8 +139,8 @@ export const App: React.FC = () => {
                     // doesn't catch unicode
                     if (e === "Error: illegal character") {
                         setInvalidValue('illegal character')
-                    } else if (e === "Error: 1") {
-                        setInvalidValue('Error: missing operand')
+                    } else if (e === "Error: missing operand") {
+                        setInvalidValue('missing operand')
                     } else if (e instanceof SyntaxError) {
                         setInvalidValue("invalid syntax")
                     } else {
