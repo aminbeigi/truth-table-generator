@@ -59,6 +59,18 @@ export const App: React.FC = () => {
             return;
         }
         setEmptyValue(true);
+
+        try {
+            const illegalCharRegex = /[/|&]/g;
+            if (illegalCharRegex.test(value)) {
+                throw 'Error: illegal character';
+            } 
+        } catch (e) {
+            setInvalidValue('illegal character')
+            console.log("caught it here")
+            return;
+        }
+
         let operandArray: string[]|string = [];
         let operand: string = '';
         for (let c of value) {
@@ -123,10 +135,12 @@ export const App: React.FC = () => {
                     */
 
                     //let regex = /[^a-zA-z10!\x00-\x7F]/ig;
+                    /*
                     const illegalCharRegex = /[^10||&&!]/g;
                     if (illegalCharRegex.test(evalString)) {
                         throw 'Error: illegal character';
                     }
+                    */
 
                     let expression: number = parse(evalString);
                     // eval() will sometimes return bool true instead of number 1??
@@ -138,17 +152,8 @@ export const App: React.FC = () => {
                     }
                     setInvalidValue('')
                 } catch (e) {
-                    console.log('skip... ' + e)
-                    // doesn't catch unicode
-                    if (e === "Error: illegal character") {
-                        setInvalidValue('illegal character')
-                    } else if (e === "Error: missing operand") {
-                        setInvalidValue('missing operand')
-                    } else if (e instanceof SyntaxError) {
-                        setInvalidValue("invalid syntax")
-                    } else {
-                        setInvalidValue('invalid input')
-                    }
+                    console.log('bottom catch block: ' + e)
+                    setInvalidValue('invalid input')
                 }
         }
 
