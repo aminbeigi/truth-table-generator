@@ -9,7 +9,7 @@ import { TruthTable } from '../components/TruthTable/TruthTable'
 import { Icons } from '../components/Icons/Icons'
 import { ErrorMessage } from '../components/ErrorMessage/ErrorMessage'
 
-import { permute, remove, parse } from '../shared/helper'
+import { permute, remove, parse, replaceHTML } from '../shared/helper'
 
 export const App: React.FC = () => {
     // TODO: wrong font loads on startup - wait till font loads
@@ -23,7 +23,7 @@ export const App: React.FC = () => {
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
-    const [errorObject, setErrorObject] = useState<any>({});
+    const [errorObject, setErrorObject] = useState({error: '1', value: '1', index: -1}); // TODO: ???
 
     // TODO: use this
     //const [state, setState] = useState({
@@ -36,15 +36,10 @@ export const App: React.FC = () => {
     // TODO: wot the hell is e
     // TODO: catch illegal characters
     const OnChangeHandler = (e: any) => {
-        let html_value: string = e.target.value
-        html_value = html_value.replace(/[^a-zA-Z|&∨∧¬()!]/ig, '');
-        // block all none ascii characters
-        html_value = html_value.replace(/[^\x00-\x7F∨∧¬]/ig, '');
-        html_value = html_value.replace('||', '∨');
-        html_value = html_value.replace('&&', '∧');
-        html_value = html_value.replace('!', '¬');
-        setValue(html_value)
-        e.target.value = html_value 
+        let htmlValue: string = e.target.value
+        htmlValue = replaceHTML(htmlValue);
+        setValue(htmlValue)
+        e.target.value = htmlValue 
     }
 
     // on start
@@ -53,8 +48,6 @@ export const App: React.FC = () => {
     }, [])
 
     useEffect(() => {
-        // TODO: ternary operator here(?)
-        // TODO: add helper functions
         if (value.length === 0) {
             setEmptyValue(false);
             return;
