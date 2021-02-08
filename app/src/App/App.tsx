@@ -23,6 +23,7 @@ export const App: React.FC = () => {
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
+    const [errorObject, setErrorObject] = useState();
 
     // TODO: use this
     //const [state, setState] = useState({
@@ -63,11 +64,13 @@ export const App: React.FC = () => {
         try {
             const illegalCharRegex = /[/|&]/g;
             if (illegalCharRegex.test(value)) {
-                throw 'Error: illegal character';
+                throw "Error: illegal character";
             } 
         } catch (e) {
-            setInvalidValue('illegal character')
-            console.log("caught it here")
+            if (e === "Error: illegal character") {
+                setInvalidValue('illegal character');
+            }
+            console.log("Above catch statement: ", e);
             return;
         }
 
@@ -75,7 +78,7 @@ export const App: React.FC = () => {
         let operand: string = '';
         for (let c of value) {
             // TODO: add helper functions
-            console.log("stack BEFORE: ", operandArray)
+            //console.log("stack BEFORE: ", operandArray)
             
             if (c === '|' || c === '&' || c === '¬' || c === '(' || c === ')') {
                 // pass;
@@ -152,7 +155,7 @@ export const App: React.FC = () => {
                     }
                     setInvalidValue('')
                 } catch (e) {
-                    console.log('bottom catch block: ' + e)
+                    //console.log('bottom catch block: ' + e)
                     setInvalidValue('invalid input')
                 }
         }
