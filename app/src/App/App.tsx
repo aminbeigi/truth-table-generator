@@ -7,6 +7,7 @@ import { Container } from 'react-bootstrap'
 import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
 import { Icons } from '../components/Icons/Icons'
+import { ErrorMessage } from '../components/ErrorMessage/ErrorMessage'
 
 import { permute, remove, parse } from '../shared/helper'
 
@@ -14,7 +15,6 @@ export const App: React.FC = () => {
     // TODO: wrong font loads on startup - wait till font loads
     // TODO: write own eval function
     // TODO: better description
-    // TODO: less bulky font
     // TODO: icon click
     const [value, setValue] = useState<string>('');
     const [emptyValue, setEmptyValue] = useState<Boolean>();
@@ -28,8 +28,9 @@ export const App: React.FC = () => {
     // TODO: catch illegal characters
     const OnChangeHandler = (e: any) => {
         let html_value: string = e.target.value
-        // TODO: leading | bug
-        html_value = html_value.replace(/[^a-zA-Z|&∨∧¬()!]/, '');
+        html_value = html_value.replace(/[^a-zA-Z|&∨∧¬()!]/ig, '');
+        // block all none ascii characters
+        html_value = html_value.replace(/[^\x00-\x7F∨∧¬]/ig, '');
         html_value = html_value.replace('||', '∨');
         html_value = html_value.replace('&', '∧');
         html_value = html_value.replace('!', '¬');
@@ -102,12 +103,13 @@ export const App: React.FC = () => {
                 }
                 evalString = evalString.replaceAll(operandArray[i], boolStr);
             }
-
                 try {
-                    let regex = /[^a-zA-z10|&!]/ig;
+                    // regexp dont work
+                    let regex = /[^a-zA-z10|&!\x00-\x7F]/ig;
                     if (regex.test(evalString)) {
                         throw 'Error: illegal character';
                     }
+                    console.log(evalString)
                     let expression: number = parse(evalString);
                     // eval() will sometimes return bool true instead of number 1??
                     // TODO: doesn't work when === ?
@@ -119,7 +121,8 @@ export const App: React.FC = () => {
                     setInvalidValue('')
                 } catch (e) {
                     console.log('skip... ' + e)
-                    if (e == 'Error: illegal character') {
+                    // doesn't catch unicode
+                    if (e === 'Error: illegal character') {
                         setInvalidValue('illegal char')
                     } else {
                         setInvalidValue('invalid input')
@@ -141,7 +144,7 @@ export const App: React.FC = () => {
                 ? ''
                 :
                 invalidValue
-                    ? invalidValue
+                    ? <ErrorMessage errorMessage={invalidValue}/>
                     :   
                     <Container className="truth-table-container">
                         <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolutions={expressionSolutions}/>
