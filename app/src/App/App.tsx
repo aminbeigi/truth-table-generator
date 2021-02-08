@@ -62,35 +62,35 @@ export const App: React.FC = () => {
         setEmptyValue(true);
         // TODO: Add more operand error checking
         try {
-            const illegalOperandRegex = /(\W)(∧|∨)|(∧|∨)(\W)|(∧|∨)$/g;
+            const illegalOperandRegex = /(∧|∨)$|^(∧|∨)/g;
             if (illegalOperandRegex.test(value)) {
                 throw "The operator is missing an operand.";
             } 
             
             const illegalOrRegex = /[/|]/g;
             if (illegalOrRegex.test(value)) {
-                throw "Error: illegal | character";
+                throw "The character | shouldn't be here.";
             } 
 
             const illegalAndRegex = /[&]/g;
             if (illegalAndRegex.test(value)) {
-                throw "Error: illegal & character";
+                throw "The character & shouldn't be here.";
             } 
 
 
         } catch (e) {
             if (e === "The operator is missing an operand.") {
-                const illegalOperandRegex = /(\W)(∧|∨)|(∧|∨)(\W)|(∧|∨)$/g;
+                const illegalOperandRegex = /(∧|∨)$|^(∧|∨)/g;
                 const index = value.search(illegalOperandRegex);
                 setErrorObject({'error': e, 'value': value, 'index': index})
             }
-            else if (e === "Error: illegal | character") {
+            else if (e === "The character | shouldn't be here.") {
                 setErrorObject({'error': e, 'value': value, 'index': value.indexOf('|')})
             }
-            else if (e === "Error: illegal & character") {
+            else if (e === "The character & shouldn't be here.") {
                 setErrorObject({'error': e, 'value': value, 'index': value.indexOf('&')})
             }
-            setInvalidValue('temp');
+            setInvalidValue('Invalid input');
             console.log("Above catch statement: ", e);
             return;
         }
@@ -148,16 +148,6 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(new RegExp("\\b" + operandArray[i] + "\\b",  'g'), boolStr);
             }
                 try {
-                    // TODO: regexp dont work for unicode
-
-                    /*
-                    const regex = /(\w)\|(\w)/g;
-                    if (regex.test(evalString)) {
-                        throw 'Error: missing operand';
-                    }
-                    */
-
-
                     let expression: number = parse(evalString);
                     // eval() will sometimes return bool true instead of number 1??
                     // TODO: doesn't work when === ?
@@ -169,6 +159,7 @@ export const App: React.FC = () => {
                     setInvalidValue('')
                 } catch (e) {
                     console.log('bottom catch block: ' + e)
+                    setErrorObject({'error': "Invalid syntax.", 'value': value, 'index': -1})
                     setInvalidValue('invalid input')
                 }
         }

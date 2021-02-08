@@ -2,10 +2,21 @@ import React from 'react'
 import { Wrapper, SyntaxOkay, SyntaxBad, ErrorMessageText } from './styled'
 
 interface Props { 
-    errorObject: any;
+    errorObject: {
+        error: string,
+        value: string,
+        index: number
+    };
 }
 
 export const ErrorMessage: React.FC<Props> = ({errorObject}) => {
+    if (errorObject['error'] === "Invalid syntax.") {
+        return (
+            <Wrapper>
+                <ErrorMessageText>{errorObject['error']}</ErrorMessageText>
+            </Wrapper>
+    )   
+    }
     let value = errorObject['value'];
     let index = errorObject['index'];
     let operator = value[index];
