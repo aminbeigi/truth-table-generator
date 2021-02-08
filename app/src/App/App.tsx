@@ -23,7 +23,7 @@ export const App: React.FC = () => {
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
-    const [errorObject, setErrorObject] = useState();
+    const [errorObject, setErrorObject] = useState({});
 
     // TODO: use this
     //const [state, setState] = useState({
@@ -69,6 +69,7 @@ export const App: React.FC = () => {
         } catch (e) {
             if (e === "Error: illegal character") {
                 setInvalidValue('illegal character');
+                setErrorObject({'value': value, 'index': value.indexOf('|')})
             }
             console.log("Above catch statement: ", e);
             return;
@@ -100,7 +101,7 @@ export const App: React.FC = () => {
                 }
             } 
 
-            console.log("stack AFTER: ", operandArray)
+            //console.log("stack AFTER: ", operandArray)
         }
 
         operandArray = remove(operandArray, '');
@@ -127,7 +128,6 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(new RegExp("\\b" + operandArray[i] + "\\b",  'g'), boolStr);
             }
                 try {
-                    console.log(evalString)
                     // TODO: regexp dont work for unicode
 
                     /*
@@ -174,7 +174,7 @@ export const App: React.FC = () => {
                 ? ''
                 :
                 invalidValue
-                    ? <ErrorMessage errorMessage={invalidValue} value={value}/>
+                    ? <ErrorMessage errorMessage={invalidValue} errorObject={errorObject}/>
                     :   
                     <Container className="truth-table-container">
                         <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolutions={expressionSolutions}/>
