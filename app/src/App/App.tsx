@@ -123,8 +123,8 @@ export const App: React.FC = () => {
                     */
 
                     //let regex = /[^a-zA-z10!\x00-\x7F]/ig;
-                    const regex1 = /[^10|&!]/g;
-                    if (regex1.test(evalString)) {
+                    const illegalCharRegex = /[^10||&&!]/g;
+                    if (illegalCharRegex.test(evalString)) {
                         throw 'Error: illegal character';
                     }
 
