@@ -9,14 +9,14 @@ interface Props {
 export const ErrorMessage: React.FC<Props> = ({errorMessage, errorObject}) => {
     let value = errorObject['value'];
     let index = errorObject['index'];
-    let syntaxBadOperator = value[index];
-    let array = value.split(syntaxBadOperator);
+    let operator = value[index];
+    let array = value.split(operator);
     console.log('value: ', value)
     console.log('index: ', index)
     console.log(array)
     return (
         <Wrapper>
-            <SyntaxOkay>{errorObject['value']}<SyntaxBad>blah</SyntaxBad></SyntaxOkay>
+            <SyntaxOkay>{array[0]}<SyntaxBad>{operator}</SyntaxBad>{array[1]}</SyntaxOkay>
             <ErrorMessageText>{errorMessage}</ErrorMessageText>
         </Wrapper>
     )
