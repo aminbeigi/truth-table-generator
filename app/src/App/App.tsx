@@ -55,7 +55,7 @@ export const App: React.FC = () => {
         let operand: string = '';
         for (let c of value) {
             // TODO: add helper functions
-            //console.log("stack BEFORE: ", operandArray)
+            console.log("stack BEFORE: ", operandArray)
             
             if (c === '|' || c === '&' || c === '¬' || c === '(' || c === ')') {
                 // pass;
@@ -77,7 +77,7 @@ export const App: React.FC = () => {
                 }
             } 
 
-            //console.log("stack AFTER: ", operandArray)
+            console.log("stack AFTER: ", operandArray)
         }
 
         operandArray = remove(operandArray, '');
@@ -101,7 +101,7 @@ export const App: React.FC = () => {
                 } else {
                     boolStr = '0';
                 }
-                evalString = evalString.replaceAll(operandArray[i], boolStr);
+                evalString = evalString.replaceAll(new RegExp("\\b" + operandArray[i] + "\\b",  'g'), boolStr);
             }
                 try {
                     // regexp dont work
