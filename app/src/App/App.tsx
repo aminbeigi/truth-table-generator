@@ -23,6 +23,13 @@ export const App: React.FC = () => {
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
 
+    // TODO: use this
+    //const [state, setState] = useState({
+    //    temp: '',
+    //})
+         
+    
+
     // TODO: should be react functional comp?
     // TODO: wot the hell is e
     // TODO: catch illegal characters
@@ -104,12 +111,20 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(new RegExp("\\b" + operandArray[i] + "\\b",  'g'), boolStr);
             }
                 try {
-                    // regexp dont work
-                    let regex = /[^a-zA-z10|&!\x00-\x7F]/ig;
+                    console.log(evalString)
+                    // TODO: regexp dont work for unicode
+                    //let regex = /[^a-zA-z10!\x00-\x7F]/ig;
+
+                    const regex1 = /(\w)\|(\w)/;
+                    if (regex1.test(evalString)) {
+                        throw 'Error: missing operand';
+                    }
+
+                    const regex = /[^10|&!]/g;
                     if (regex.test(evalString)) {
                         throw 'Error: illegal character';
                     }
-                    console.log(evalString)
+
                     let expression: number = parse(evalString);
                     // eval() will sometimes return bool true instead of number 1??
                     // TODO: doesn't work when === ?
@@ -122,8 +137,12 @@ export const App: React.FC = () => {
                 } catch (e) {
                     console.log('skip... ' + e)
                     // doesn't catch unicode
-                    if (e === 'Error: illegal character') {
-                        setInvalidValue('illegal char')
+                    if (e === "Error: illegal character") {
+                        setInvalidValue('illegal character')
+                    } else if (e === "Error: 1") {
+                        setInvalidValue('Error: missing operand')
+                    } else if (e instanceof SyntaxError) {
+                        setInvalidValue("invalid syntax")
                     } else {
                         setInvalidValue('invalid input')
                     }
@@ -144,7 +163,7 @@ export const App: React.FC = () => {
                 ? ''
                 :
                 invalidValue
-                    ? <ErrorMessage errorMessage={invalidValue}/>
+                    ? <ErrorMessage errorMessage={invalidValue} value={value}/>
                     :   
                     <Container className="truth-table-container">
                         <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolutions={expressionSolutions}/>

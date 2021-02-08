@@ -1,15 +1,17 @@
 import React from 'react'
-import { InputGroup, FormControl } from 'react-bootstrap'
+import {ErrorMessageDiv} from './styled'
 
 interface Props { 
     errorMessage: string;
+    value: string;
 }
 
-export const ErrorMessage: React.FC<Props> = ({errorMessage}) => {
+export const ErrorMessage: React.FC<Props> = ({errorMessage, value}) => {
     return (
-        <div className="error-message">
-            <h1>{errorMessage}</h1>
-        </div>
+        <ErrorMessageDiv className="error-message">
+            <h2>{value}</h2>
+            <p>{errorMessage}</p>
+        </ErrorMessageDiv>
     )
 }
 
