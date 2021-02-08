@@ -2,11 +2,10 @@ import React from 'react'
 import { Wrapper, SyntaxOkay, SyntaxBad, ErrorMessageText } from './styled'
 
 interface Props { 
-    errorMessage: string;
     errorObject: any;
 }
 
-export const ErrorMessage: React.FC<Props> = ({errorMessage, errorObject}) => {
+export const ErrorMessage: React.FC<Props> = ({errorObject}) => {
     let value = errorObject['value'];
     let index = errorObject['index'];
     let operator = value[index];
@@ -17,7 +16,7 @@ export const ErrorMessage: React.FC<Props> = ({errorMessage, errorObject}) => {
     return (
         <Wrapper>
             <SyntaxOkay>{array[0]}<SyntaxBad>{operator}</SyntaxBad>{array[1]}</SyntaxOkay>
-            <ErrorMessageText>{errorMessage}</ErrorMessageText>
+            <ErrorMessageText>{errorObject['error']}</ErrorMessageText>
         </Wrapper>
     )
 }

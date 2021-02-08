@@ -62,14 +62,25 @@ export const App: React.FC = () => {
         setEmptyValue(true);
 
         try {
-            const illegalCharRegex = /[/|&]/g;
-            if (illegalCharRegex.test(value)) {
-                throw "Error: illegal character";
+            const illegalOrRegex = /[/|]/g;
+            if (illegalOrRegex.test(value)) {
+                throw "Error: illegal | character";
             } 
+
+            const illegalAndRegex = /[&]/g;
+            if (illegalAndRegex.test(value)) {
+                throw "Error: illegal & character";
+            } 
+
+
         } catch (e) {
-            if (e === "Error: illegal character") {
+            if (e === "Error: illegal | character") {
                 setInvalidValue('illegal character');
-                setErrorObject({'value': value, 'index': value.indexOf('|')})
+                setErrorObject({'error': e, 'value': value, 'index': value.indexOf('|')})
+            }
+            else if (e === "Error: illegal & character") {
+                setInvalidValue('illegal character');
+                setErrorObject({'error': e, 'value': value, 'index': value.indexOf('&')})
             }
             console.log("Above catch statement: ", e);
             return;
@@ -155,7 +166,7 @@ export const App: React.FC = () => {
                     }
                     setInvalidValue('')
                 } catch (e) {
-                    //console.log('bottom catch block: ' + e)
+                    console.log('bottom catch block: ' + e)
                     setInvalidValue('invalid input')
                 }
         }
@@ -174,7 +185,7 @@ export const App: React.FC = () => {
                 ? ''
                 :
                 invalidValue
-                    ? <ErrorMessage errorMessage={invalidValue} errorObject={errorObject}/>
+                    ? <ErrorMessage errorObject={errorObject}/>
                     :   
                     <Container className="truth-table-container">
                         <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolutions={expressionSolutions}/>
