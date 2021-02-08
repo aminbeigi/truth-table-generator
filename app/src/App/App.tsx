@@ -19,7 +19,7 @@ export const App: React.FC = () => {
     // TODO: export default vs export
     const [value, setValue] = useState<string>('');
     const [emptyValue, setEmptyValue] = useState<Boolean>();
-    const [invalidValue, setInvalidValue] = useState<string>('');
+    const [invalidValue, setInvalidValue] = useState<Boolean>();
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
@@ -37,6 +37,7 @@ export const App: React.FC = () => {
     // TODO: catch illegal characters
     const OnChangeHandler = (e: any) => {
         let htmlValue: string = e.target.value
+        console.log(htmlValue)
         htmlValue = replaceHTML(htmlValue);
         setValue(htmlValue)
         e.target.value = htmlValue 
@@ -55,7 +56,7 @@ export const App: React.FC = () => {
         setEmptyValue(true);
         // TODO: Add more operand error checking
         try {
-            const illegalOperandRegex = /(∧|∨)$|^(∧|∨)/g;
+            const illegalOperandRegex = /(∧|∨|¬)$|^(∧|∨|¬)/g;
             if (illegalOperandRegex.test(value)) {
                 throw "The operator is missing an operand.";
             } 
@@ -69,11 +70,9 @@ export const App: React.FC = () => {
             if (illegalAndRegex.test(value)) {
                 throw "The character & shouldn't be here.";
             } 
-
-
         } catch (e) {
             if (e === "The operator is missing an operand.") {
-                const illegalOperandRegex = /(∧|∨)$|^(∧|∨)/g;
+                const illegalOperandRegex = /(∧|∨|¬)$|^(∧|∨|¬)/g;
                 const index = value.search(illegalOperandRegex);
                 setErrorObject({'error': e, 'value': value, 'index': index})
             }
@@ -83,7 +82,7 @@ export const App: React.FC = () => {
             else if (e === "The character & shouldn't be here.") {
                 setErrorObject({'error': e, 'value': value, 'index': value.indexOf('&')})
             }
-            setInvalidValue('Invalid input');
+            setInvalidValue(true);
             console.log("Above catch statement: ", e);
             return;
         }
@@ -149,14 +148,13 @@ export const App: React.FC = () => {
                     } else if (expression == 0 || expression) {
                         expressionSolutionArray.push(false);
                     }
-                    setInvalidValue('')
+                    setInvalidValue(false)
                 } catch (e) {
                     console.log('bottom catch block: ' + e)
                     setErrorObject({'error': "Invalid syntax.", 'value': value, 'index': -1})
-                    setInvalidValue('invalid input')
+                    setInvalidValue(true)
                 }
         }
-
         setTableHeaders(operandArray);
         setTableRows(tableRows)
         setExpressionSolutions(expressionSolutionArray);
