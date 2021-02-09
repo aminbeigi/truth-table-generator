@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
+import { BodyText, UL, LI, StyledModalTitle } from './styled'
 
 export const Icons: React.FC = () => {
     const [show, setShow] = useState(false);
@@ -10,31 +11,30 @@ export const Icons: React.FC = () => {
     const githubLink = 'https://github.com/aminbeigi/truth-table-generator';
 
     return (
-        // TODO: new line on body
         <>
             <div><button onAuxClick={() => window.open(githubLink)} onClick={() => window.location.href = githubLink}><i className="fab fa-github"></i></button></div>
             <div><button onClick={handleShow}><i className="far fa-question-circle"></i></button></div>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Help</Modal.Title>
+                    <StyledModalTitle>Help</StyledModalTitle>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>This tool generates truth tables for propositional logic formulas.</p>
-                    <p>For example, the formula p ∧ q  could be written as p || q, as p.</p>
-                    <p>Enter an expression in the input box to get started.</p>
-                    <p>Valid operators:</p>
-                    <ul>
-                        <li>
+                    <BodyText>This tool generates truth tables for propositional logic formulas.</BodyText>
+                    <BodyText>For example, the formula p ∧ q  could be written as p || q, as p.</BodyText>
+                    <BodyText>Enter an expression in the input box to get started.</BodyText>
+                    <BodyText>VaLId operators:</BodyText>
+                    <UL>
+                        <LI>
                             And: &amp;&amp;
-                        </li>
-                        <li>
+                        </LI>
+                        <LI>
                             Or: ||
-                        </li>
-                        <li>
+                        </LI>
+                        <LI>
                             Negation: !
-                        </li>
-                    </ul>
+                        </LI>
+                    </UL>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>

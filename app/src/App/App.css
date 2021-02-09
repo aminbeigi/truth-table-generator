@@ -11,24 +11,6 @@
     font-family: 'Roboto';
 }
 
-.title {
-    text-align: center;
-    font-size: 72px;
-    font-family: 'Major Mono Display';
-    margin-top: 125px;
-}
-
-table {
-    margin: 0 auto;
-    text-align: center;
-    font-size: 24px;
-    max-width: 90%;
-    border: 0;
-}
-
-td {
-    border-bottom-color: 1px solid red;
-}
 
 .icon-container {
     position: fixed;
@@ -58,29 +40,7 @@ button {
 	outline: inherit;
 }
 
-.modal-title,
-.modal-body > p{
-    color: black !important;
-    margin: 4px;
-}
 
 .close > span {
     color: red;
-}
-
-.modal-body ul {
-    list-style: initial;
-    margin: initial;
-    padding: 0 0 0 40px;
-}
-
-.modal-body li {
-    display: list-item;
-    color: black;
-}
-
-.form-control {
-    outline: 0px !important;
-    -webkit-appearance: none;
-    box-shadow: none !important;
 }

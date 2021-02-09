@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap';
+import { Title } from './styled';
 
 import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
@@ -162,7 +163,7 @@ export const App: React.FC = () => {
 
     return (
         <div className="app">
-            <h1 className="title">Truth Table Generator</h1>
+            <Title>Truth Table Generator</Title>
             <ExpressionField onChangeHandler={OnChangeHandler}/>
 
             { !emptyValue

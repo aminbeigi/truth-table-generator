@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { StyledTable } from './styled'
 import { TruthTableHeader } from './TruthTableHeader/TruthTableHeader'
 import { TruthTableRow } from './TruthTableRow/TruthTableRow'
 
@@ -18,7 +18,7 @@ export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression
 
     return (
         <div>
-            <Table>
+            <StyledTable>
                 <thead>
                     <tr>
                         {tableHeaders.map((tableHeader, i) => { 
@@ -37,7 +37,7 @@ export const TruthTable: React.FC<Props> = ({tableHeaders, tableRows, expression
                             )})
                         }
               </tbody>
-            </Table>
+            </StyledTable>
         </div>
     )
 }
