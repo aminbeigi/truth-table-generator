@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputGroup, FormControl } from 'react-bootstrap'
+import { StyledInputGroup, StyledFormControl, Wrapper } from './styled'
 
 interface Props { 
     onChangeHandler: (e: any) => void;
@@ -7,10 +7,10 @@ interface Props {
 
 export const ExpressionField: React.FC<Props> = ({onChangeHandler}) => {
     return (
-        <div>
-            <InputGroup onChange={onChangeHandler} size="lg" className="mb-3">
-                <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Enter an expression"/>
-            </InputGroup>
-        </div>
+        <Wrapper>
+            <StyledInputGroup onChange={onChangeHandler} size="lg" className="mb-3">
+                <StyledFormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Enter an expression"/>
+            </StyledInputGroup>
+        </Wrapper>
     )
 }
