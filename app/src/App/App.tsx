@@ -13,29 +13,14 @@ import { ErrorMessage } from '../components/ErrorMessage/ErrorMessage'
 import { permute, remove, parse, replaceHTML } from '../shared/helper'
 
 export const App: React.FC = () => {
-    // TODO: wrong font loads on startup - wait till font loads
-    // TODO: write own eval function
-    // TODO: better description
-    // TODO: icon middle click
-    // TODO: export default vs export
     const [value, setValue] = useState<string>('');
     const [emptyValue, setEmptyValue] = useState<Boolean>();
     const [invalidValue, setInvalidValue] = useState<Boolean>();
     const [tableHeaders, setTableHeaders] = useState<string[]>([]);
     const [tableRows, setTableRows] = useState<Boolean[][]>([]);
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
-    const [errorObject, setErrorObject] = useState({error: '1', value: '1', index: -1}); // TODO: ???
+    const [errorObject, setErrorObject] = useState({error: '1', value: '1', index: -1});
 
-    // TODO: use this
-    //const [state, setState] = useState({
-    //    temp: '',
-    //})
-         
-    
-
-    // TODO: should be react functional comp?
-    // TODO: wot the hell is e
-    // TODO: catch illegal characters
     const OnChangeHandler = (e: any) => {
         let htmlValue: string = e.target.value
         console.log(htmlValue)
@@ -55,7 +40,6 @@ export const App: React.FC = () => {
             return;
         }
         setEmptyValue(true);
-        // TODO: Add more operand error checking
         try {
             const illegalOperandRegex = /(∧|∨|¬)$|^(∧|∨|¬)/g;
             if (illegalOperandRegex.test(value)) {
@@ -91,9 +75,6 @@ export const App: React.FC = () => {
         let operandArray: string[]|string = [];
         let operand: string = '';
         for (let c of value) {
-            // TODO: add helper functions
-            //console.log("stack BEFORE: ", operandArray)
-            
             if (c === '|' || c === '&' || c === '¬' || c === '(' || c === ')') {
                 // pass;
             }
@@ -142,8 +123,7 @@ export const App: React.FC = () => {
             }
                 try {
                     let expression: number = parse(evalString);
-                    // eval() will sometimes return bool true instead of number 1??
-                    // TODO: doesn't work when === ?
+                    // will sometimes return bool true instead of number 1??
                     if (expression == 1 || expression) {
                         expressionSolutionArray.push(true);
                     } else if (expression == 0 || expression) {
