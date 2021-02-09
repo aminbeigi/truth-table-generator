@@ -14,7 +14,7 @@
 </p>
 
 ## Description
-...
+Truth-Table-Generator is a tool that dynamically generates a truth table.
 
 ## Contributions
 Contributions are always welcome!  
