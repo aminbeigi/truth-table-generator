@@ -8,9 +8,7 @@
 <br />
 
 <p align="center">
-<a href="../../issues"><img src="https://img.shields.io/github/issues/aminbeigi/truth-table-generator.svg?style=flat-square" /></a>
-<a href="../../pulls"><img src="https://img.shields.io/github/issues-pr/aminbeigi/truth-table-generator.svg?style=flat-square" /></a>
-<img src="https://img.shields.io/github/license/aminbeigi/truth-table-generator?style=flat-square">
+
 </p>
 
 ## Description
