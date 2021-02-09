@@ -24,13 +24,12 @@ export const remove = (array: string[], value: string): string[] => {
     return array.filter(i => i !== value);
 }
 
+// WARNING: parse function vulnerable to XSS
 export const parse = (str: string): number => {
     return Function(`'use strict'; return (${str})`)()
 }
-
 export const replaceHTML = (str: string): string => {
         str = str.replace(/[^a-zA-Z|&∨∧¬()!]/ig, '');
-        // block all none ascii characters
         str = str.replace(/[^\x00-\x7F∨∧¬]/ig, ''); // block all none ascii characters
         str = str.replace('||', '∨');
         str = str.replace('&&', '∧');
