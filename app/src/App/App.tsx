@@ -3,7 +3,7 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
-import { Title } from './styled';
+import { Title, IconWrapper } from './styled';
 
 import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
@@ -176,9 +176,9 @@ export const App: React.FC = () => {
                         <TruthTable tableHeaders={tableHeaders} tableRows={tableRows} expression={value} expressionSolutions={expressionSolutions}/>
                     </Container>
             }
-            <div className="icon-container">
+            <IconWrapper>
                 <Icons />
-            </div>
+            </IconWrapper>
         </div>
     )
 }

@@ -6,3 +6,9 @@ export const Title = styled.h1`
     font-family: 'Major Mono Display';
     margin-top: 125px;
 `;
+
+export const IconWrapper = styled.div`
+    position: fixed;
+    bottom: 0;
+    right: 0;
+`;

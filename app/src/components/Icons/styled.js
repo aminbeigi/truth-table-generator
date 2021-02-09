@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-import { Modal, Button } from 'react-bootstrap'
-
-export const Wrapper = styled.div`
-`;
+import { Modal } from 'react-bootstrap'
 
 export const BodyText = styled.p`
     color: black !important;
