@@ -1,5 +1,5 @@
 <p align="center">
-<img src="app/public/icon.ico" width="128px" height="128px"/>
+<img src="app/public/icon.png" width="128px" height="128px"/>
 <br/>
 <h3 align="center">Truth Table Generator</h3>
 <p align="center">...</p>
