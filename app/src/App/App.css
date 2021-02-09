@@ -30,25 +30,6 @@ td {
     border-bottom-color: 1px solid red;
 }
 
-.input-group * {
-    font-size: 44px !important;
-    color: white !important;
-    border: none;
-}
-
-.form-control {
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-}
-
-input {
-    max-width: 777px;
-    text-align: center;
-
-    background-color: transparent !important;
-}
-
 .icon-container {
     position: fixed;
     bottom: 0;
