@@ -14,7 +14,7 @@
 </p>
 
 ## Description
-Truth-Table-Generator is a tool that dynamically generates a truth table.
+Truth-Table-Generator is a tool that dynamically generates a truth table. Created with React, React Bootstrap and Styled Components. 
 
 ## Contributions
 Contributions are always welcome!  
