@@ -2,7 +2,7 @@ import React from 'react'
 import { StyledInputGroup, StyledFormControl, Wrapper } from './styled'
 
 interface Props { 
-    onChangeHandler: (e: any) => void;
+    onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const ExpressionField: React.FC<Props> = ({onChangeHandler}) => {

@@ -24,7 +24,7 @@ export const remove = (array: string[], value: string): string[] => {
     return array.filter(i => i !== value);
 }
 
-// WARNING: parse function vulnerable to XSS
+// WARNING: 
 export const parse = (str: string): number => {
     return Function(`'use strict'; return (${str})`)()
 }

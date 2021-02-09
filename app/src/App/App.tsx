@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, SyntheticEvent } from 'react'
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,9 +21,8 @@ export const App: React.FC = () => {
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
     const [errorObject, setErrorObject] = useState({error: '1', value: '1', index: -1});
 
-    const OnChangeHandler = (e: any) => {
-        let htmlValue: string = e.target.value
-        console.log(htmlValue)
+    const OnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let htmlValue: string = e.target.value;
         htmlValue = replaceHTML(htmlValue);
         setValue(htmlValue)
         e.target.value = htmlValue 
