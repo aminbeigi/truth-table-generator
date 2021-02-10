@@ -53,10 +53,6 @@ export const App: React.FC = () => {
                 throw "The character & shouldn't be here.";
             } 
 
-            if (/Function|alert/g.test(value)) {
-                throw "Invalid syntax.";
-            }
-
         } catch (e) {
             if (e === "The operator is missing an operand.") {
                 const index = value.search(/(∧|∨|¬)$|^(∧|∨|¬)/g);
@@ -65,8 +61,8 @@ export const App: React.FC = () => {
             else if (e === "The character | shouldn't be here.") {
                 setErrorObject({'error': e, 'value': value, 'index': value.indexOf('|')});
             }
-            else if (e === "Invalid syntax.") {
-                setErrorObject({'error': e, 'value': value, 'index': -1});
+            else if (e === "The character | shouldn't be here.") {
+                setErrorObject({'error': e, 'value': value, 'index': value.indexOf('&')});
             }
             setInvalidValue(true);
             return;
@@ -120,7 +116,9 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(new RegExp("\\b" + operandArray[i] + "\\b",  'g'), boolStr);
             }
                 try {
-
+                    if (/[^10\|&!]/.test(evalString)) {
+                        throw "Invalid syntax.";
+                    }
                     let expression: number = parse(evalString);
                     // will sometimes return bool true instead of number 1??
                     if (expression == 1 || expression) {
