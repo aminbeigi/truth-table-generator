@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-import './Overrides'
+import './Overrides.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
@@ -41,34 +41,34 @@ export const App: React.FC = () => {
         }
         setEmptyValue(true);
         try {
-            const illegalOperandRegex = /(∧|∨|¬)$|^(∧|∨|¬)/g;
-            if (illegalOperandRegex.test(value)) {
+            if (/(∧|∨|¬)$|^(∧|∨|¬)/g.test(value)) {
                 throw "The operator is missing an operand.";
             } 
             
-            const illegalOrRegex = /[/|]/g;
-            if (illegalOrRegex.test(value)) {
+            if (/[/|]/g.test(value)) {
                 throw "The character | shouldn't be here.";
             } 
 
-            const illegalAndRegex = /[&]/g;
-            if (illegalAndRegex.test(value)) {
+            if (/[&]/g.test(value)) {
                 throw "The character & shouldn't be here.";
             } 
+
+            if (/Function|alert/g.test(value)) {
+                throw "Invalid syntax.";
+            }
+
         } catch (e) {
             if (e === "The operator is missing an operand.") {
-                const illegalOperandRegex = /(∧|∨|¬)$|^(∧|∨|¬)/g;
-                const index = value.search(illegalOperandRegex);
-                setErrorObject({'error': e, 'value': value, 'index': index})
+                const index = value.search(/(∧|∨|¬)$|^(∧|∨|¬)/g);
+                setErrorObject({'error': e, 'value': value, 'index': index});
             }
             else if (e === "The character | shouldn't be here.") {
-                setErrorObject({'error': e, 'value': value, 'index': value.indexOf('|')})
+                setErrorObject({'error': e, 'value': value, 'index': value.indexOf('|')});
             }
-            else if (e === "The character & shouldn't be here.") {
-                setErrorObject({'error': e, 'value': value, 'index': value.indexOf('&')})
+            else if (e === "Invalid syntax.") {
+                setErrorObject({'error': e, 'value': value, 'index': -1});
             }
             setInvalidValue(true);
-            console.log("Above catch statement: ", e);
             return;
         }
 
@@ -94,8 +94,6 @@ export const App: React.FC = () => {
                     operandArray.push(operand);
                 }
             } 
-
-            //console.log("stack AFTER: ", operandArray)
         }
 
         operandArray = remove(operandArray, '');
@@ -122,6 +120,7 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(new RegExp("\\b" + operandArray[i] + "\\b",  'g'), boolStr);
             }
                 try {
+
                     let expression: number = parse(evalString);
                     // will sometimes return bool true instead of number 1??
                     if (expression == 1 || expression) {
@@ -131,7 +130,6 @@ export const App: React.FC = () => {
                     }
                     setInvalidValue(false)
                 } catch (e) {
-                    console.log('bottom catch block: ' + e)
                     setErrorObject({'error': "Invalid syntax.", 'value': value, 'index': -1})
                     setInvalidValue(true)
                 }
