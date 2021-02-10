@@ -1,9 +1,10 @@
-import React, { useState, useEffect, SyntheticEvent } from 'react'
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import './App.css'
+import './Overrides'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
-import { Title, IconWrapper } from './styled';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container } from 'react-bootstrap'
+import { Title, IconWrapper } from './styled'
 
 import { ExpressionField } from '../components/ExpressionField/ExpressionField'
 import { TruthTable } from '../components/TruthTable/TruthTable'
@@ -24,8 +25,8 @@ export const App: React.FC = () => {
     const OnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let htmlValue: string = e.target.value;
         htmlValue = replaceHTML(htmlValue);
-        setValue(htmlValue)
-        e.target.value = htmlValue 
+        setValue(htmlValue);
+        e.target.value = htmlValue;
     }
 
     // on start
