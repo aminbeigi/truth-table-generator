@@ -22,7 +22,7 @@ export const App: React.FC = () => {
     const [expressionSolutions, setExpressionSolutions] = useState<Boolean[]>([]);
     const [errorObject, setErrorObject] = useState({error: '1', value: '1', index: -1});
 
-    const OnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let htmlValue: string = e.target.value;
         htmlValue = replaceHTML(htmlValue);
         setValue(htmlValue);
@@ -142,7 +142,7 @@ export const App: React.FC = () => {
     return (
         <div className="app">
             <Title>Truth Table Generator</Title>
-            <ExpressionField onChangeHandler={OnChangeHandler}/>
+            <ExpressionField onChangeHandler={onValueChange}/>
 
             { !emptyValue
                 ? ''
