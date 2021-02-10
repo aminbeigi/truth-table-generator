@@ -142,7 +142,7 @@ export const App: React.FC = () => {
     return (
         <div className="app">
             <Title>Truth Table Generator</Title>
-            <ExpressionField onChangeHandler={onValueChange}/>
+            <ExpressionField onValueChange={onValueChange}/>
 
             { !emptyValue
                 ? ''
