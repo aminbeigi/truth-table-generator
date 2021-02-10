@@ -24,7 +24,7 @@ export const remove = (array: string[], value: string): string[] => {
     return array.filter(i => i !== value);
 }
 
-// WARNING: 
+// using Function constructor as code can only be executed client side on users browser
 export const parse = (str: string): number => {
     return Function(`'use strict'; return (${str})`)()
 }
