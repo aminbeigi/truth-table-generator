@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import './App.css'
-import './Overrides.css'
+import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import './App.css';
+import './Overrides.css';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container } from 'react-bootstrap'
-import { Title, IconWrapper } from './styled'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
+import { Title, IconWrapper } from './styled';
 
-import { ExpressionField } from '../components/ExpressionField/ExpressionField'
-import { TruthTable } from '../components/TruthTable/TruthTable'
-import { Icons } from '../components/Icons/Icons'
-import { ErrorMessage } from '../components/ErrorMessage/ErrorMessage'
+import { ExpressionField } from '../components/ExpressionField/ExpressionField';
+import { TruthTable } from '../components/TruthTable/TruthTable';
+import { Icons } from '../components/Icons/Icons';
+import { ErrorMessage } from '../components/ErrorMessage/ErrorMessage';
 
-import { permute, remove, parse, replaceHTML } from '../shared/helper'
+import { permute, remove, parse, replaceHTML } from '../shared/helper';
 
 export const App: React.FC = () => {
     const [value, setValue] = useState<string>('');
