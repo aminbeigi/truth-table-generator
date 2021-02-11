@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.1",
-    "@types/react-bootstrap": "^0.32.25"
+    "@types/react-bootstrap": "^0.32.25",
+    "@types/react-helmet": "^6.1.0"
   }
 }
