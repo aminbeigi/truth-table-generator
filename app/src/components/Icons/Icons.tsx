@@ -23,7 +23,8 @@ export const Icons: React.FC = () => {
                     <BodyText>This tool generates truth tables for propositional logic formulas.</BodyText>
                     <BodyText>For example, the formula p ∧ q  could be written as p || q, as p.</BodyText>
                     <BodyText>Enter an expression in the input box to get started.</BodyText>
-                    <BodyText>VaLId operators:</BodyText>
+                    <p></p>
+                    <BodyText>Valid operators:</BodyText>
                     <UL>
                         <LI>
                             And: &amp;&amp;
