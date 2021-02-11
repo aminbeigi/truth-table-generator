@@ -119,7 +119,7 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(new RegExp("\\b" + operandArray[i] + "\\b",  'g'), boolStr);
             }
                 try {
-                    if (/[^10|&!]/.test(evalString)) {
+                    if (/[^10|&!()]/.test(evalString)) {
                         throw SyntaxError;
                     }
                     let expression: number = parse(evalString);
