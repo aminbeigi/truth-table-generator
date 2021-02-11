@@ -5,3 +5,38 @@
     color:white;
     font-family: 'Roboto';
 }
+
+:root {
+    font-size: 106px;
+}
+
+@media screen and (min-width:320px)  { 
+    /* smartphones, iPhone, portrait 480x320 phones */
+    :root {
+        font-size: 8px  !important;
+    }
+}
+@media screen and(min-width:481px)  { 
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    :root {
+        font-size: 10px  !important;
+    }
+}
+@media screen and (min-width:641px)  { 
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    :root {
+        font-size: 12px !important;
+    }
+}
+@media screen and (min-width:961px)  { 
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+    :root {
+        font-size: 14px !important;
+    }
+}
+@media screen and (min-width:1025px) { 
+    /* big landscape tablets, laptops, and desktops */ 
+    :root {
+        font-size: 16px !important;
+    }
+}

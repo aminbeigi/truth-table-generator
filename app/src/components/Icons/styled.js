@@ -14,10 +14,10 @@ export const UL = styled.ul`
 
 export const LI = styled.li`
     display: list-item;
-    color: black;;
+    color: black;
 `;
 
 export const StyledModalTitle = styled(Modal.Title)`
     color: black !important;
-    margin: 4px
+    margin: 4px;
 `;

@@ -19,7 +19,7 @@ button {
 .fa-question-circle {
     transition: all .2s ease-in-out; 
     padding: 15px;
-    font-size: 75px;
+    font-size: 4rem;
 }
 
 .fa-github:hover,
