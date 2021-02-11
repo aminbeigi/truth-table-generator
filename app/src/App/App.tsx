@@ -116,8 +116,8 @@ export const App: React.FC = () => {
                 evalString = evalString.replaceAll(new RegExp("\\b" + operandArray[i] + "\\b",  'g'), boolStr);
             }
                 try {
-                    if (/[^10\|&!]/.test(evalString)) {
-                        throw "Invalid syntax.";
+                    if (/[^10|&!]/.test(evalString)) {
+                        throw SyntaxError;
                     }
                     let expression: number = parse(evalString);
                     // will sometimes return bool true instead of number 1??
