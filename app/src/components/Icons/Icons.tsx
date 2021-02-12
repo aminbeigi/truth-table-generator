@@ -4,7 +4,7 @@ import { BodyText, UL, LI, StyledModalTitle } from './styled'
 
 export const Icons: React.FC = () => {
     const [show, setShow] = useState(false);
-
+    // TODO: Add Icon component
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
