@@ -12,7 +12,7 @@ export const Icons: React.FC = () => {
 
     return (
         <>
-            <div><button onAuxClick={() => window.open(githubLink)} onClick={() => window.location.href = githubLink}><i className="fab fa-github"></i></button></div>
+            <div><a href={githubLink}><i className="fab fa-github"></i></a></div>
             <div><button onClick={handleShow}><i className="far fa-question-circle"></i></button></div>
 
             <Modal show={show} onHide={handleClose}>
@@ -21,7 +21,7 @@ export const Icons: React.FC = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <BodyText>This tool generates truth tables for propositional logic formulas.</BodyText>
-                    <BodyText>For example, the formula p ∧ q  could be written as p || q, as p.</BodyText>
+                    <BodyText>For example, the formula p ∧ q  could be written as p || q.</BodyText>
                     <BodyText>Enter an expression in the input box to get started.</BodyText>
                     <p></p>
                     <BodyText>Valid operators:</BodyText>
