@@ -31,9 +31,7 @@ export const App: React.FC = () => {
 
     // on start
     useEffect(() => {
-
         document.body.style.backgroundColor = '#212529' 
-        console.log("ready")
     }, [])
 
     useEffect(() => {
