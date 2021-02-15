@@ -41,6 +41,7 @@ export const App: React.FC = () => {
         }
         setEmptyValue(true);
         try {
+            // TODO: fix operand not operator bug
             if (/(∧|∨|¬)$|^(∧|∨|¬)/g.test(value)) {
                 throw "The operator is missing an operand.";
             } 
