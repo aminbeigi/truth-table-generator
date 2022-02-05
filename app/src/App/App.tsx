@@ -45,29 +45,37 @@ export const App: React.FC = () => {
     }
     setEmptyValue(true);
 
-		// check if value is valid before evaluating user input
+    // check if value is valid before evaluating user input
     if (/(∧|∨|¬)$|^(∧|∨)/g.test(value)) {
       const index = value.search(/(∧|∨|¬)$|^(∧|∨|¬)/g);
-			const errorMessage = "The operator is missing an operand.";
+      const errorMessage = "The operator is missing an operand.";
       setErrorObject({ error: errorMessage, value: value, index: index });
       setInvalidValue(true);
-			return;
-		}
+      return;
+    }
     if (/[/|]/g.test(value)) {
-			const errorMessage = "The character | shouldn't be here.";
-      setErrorObject({ error: errorMessage, value: value, index: value.indexOf("|") });
+      const errorMessage = "The character | shouldn't be here.";
+      setErrorObject({
+        error: errorMessage,
+        value: value,
+        index: value.indexOf("|"),
+      });
       setInvalidValue(true);
-			return;
-		}
+      return;
+    }
     if (/[&]/g.test(value)) {
       const errorMessage = "The character & shouldn't be here.";
-      setErrorObject({ error: errorMessage, value: value, index: value.indexOf("&") });
+      setErrorObject({
+        error: errorMessage,
+        value: value,
+        index: value.indexOf("&"),
+      });
       setInvalidValue(true);
-			return;
-		}
+      return;
+    }
 
-    let operandArray: string[] | string = [];
-    let operand: string = "";
+    let operandArray: string[] = [];
+    let operand = "";
     for (let c of value) {
       if (c === "|" || c === "&" || c === "¬" || c === "(" || c === ")") {
         // pass;
@@ -103,25 +111,22 @@ export const App: React.FC = () => {
 
       for (let i = 0; i < operandArray.length; ++i) {
         bool = boolArray[i];
-        if (bool) {
-          boolStr = "1";
-        } else {
-          boolStr = "0";
-        }
+        boolStr = bool ? "1" : "0";
         evalString = evalString.replaceAll(
           new RegExp("\\b" + operandArray[i] + "\\b", "g"),
           boolStr
         );
       }
+
       try {
         if (/[^10|&!()]/.test(evalString)) {
           throw SyntaxError;
         }
         let expression: number = parse(evalString);
         // will sometimes return bool true instead of number 1??
-        if (expression == 1 || expression) {
+        if (expression === 1 || expression) {
           expressionSolutionArray.push(true);
-        } else if (expression == 0 || expression) {
+        } else if (expression === 0 || expression) {
           expressionSolutionArray.push(false);
         }
         setInvalidValue(false);
@@ -140,20 +145,19 @@ export const App: React.FC = () => {
       <Title>Truth Table Generator</Title>
       <ExpressionField onValueChange={onValueChange} />
 
-      {!emptyValue ? (
-        ""
-      ) : invalidValue ? (
-        <ErrorMessage errorObject={errorObject} />
-      ) : (
-        <Container className="truth-table-container">
-          <TruthTable
-            tableHeaders={tableHeaders}
-            tableRows={tableRows}
-            expression={value}
-            expressionSolutions={expressionSolutions}
-          />
-        </Container>
-      )}
+      {!emptyValue
+				? ""
+      	: invalidValue
+					? <ErrorMessage errorObject={errorObject} />
+      		: <Container className="truth-table-container">
+      		    <TruthTable
+      		      tableHeaders={tableHeaders}
+      		      tableRows={tableRows}
+      		      expression={value}
+      		      expressionSolutions={expressionSolutions}
+      		    />
+      		  </Container>
+      }
       <IconWrapper>
         <Icons />
       </IconWrapper>
