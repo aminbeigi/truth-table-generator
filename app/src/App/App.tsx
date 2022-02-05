@@ -144,19 +144,20 @@ export const App: React.FC = () => {
       <Title>Truth Table Generator</Title>
       <ExpressionField onValueChange={onValueChange} />
 
-      {!emptyValue
-				? ""
-      	: invalidValue
-					? <ErrorMessage errorObject={errorObject} />
-      		: <Container className="truth-table-container">
-      		    <TruthTable
-      		      tableHeaders={tableHeaders}
-      		      tableRows={tableRows}
-      		      expression={value}
-      		      expressionSolutions={expressionSolutions}
-      		    />
-      		  </Container>
-      }
+      {!emptyValue ? (
+        ""
+      ) : invalidValue ? (
+        <ErrorMessage errorObject={errorObject} />
+      ) : (
+        <Container className="truth-table-container">
+          <TruthTable
+            tableHeaders={tableHeaders}
+            tableRows={tableRows}
+            expression={value}
+            expressionSolutions={expressionSolutions}
+          />
+        </Container>
+      )}
       <IconWrapper>
         <Icons />
       </IconWrapper>

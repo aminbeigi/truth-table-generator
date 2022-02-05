@@ -1,14 +1,14 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Title = styled.h1`
-    text-align: center;
-    font-size: 4.5rem;
-    font-family: 'Major Mono Display';
-    margin-top: 25px;
+  text-align: center;
+  font-size: 4.5rem;
+  font-family: "Major Mono Display";
+  margin-top: 25px;
 `;
 
 export const IconWrapper = styled.div`
-    position: fixed;
-    bottom: 0;
-    right: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
 `;
