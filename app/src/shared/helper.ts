@@ -7,14 +7,11 @@ export class Helper {
                 let zeros = '0'.repeat(n - bin.length);
                 bin = zeros + bin;
             }
-            let boolArray = [];
-            for (let c of bin) {
-                if (c === '1') {
-                    boolArray.push(true);
-                } else {
-                    boolArray.push(false);
-                }
-            }       
+
+            const binArray = Array.from(bin);
+            const boolArray: boolean[] = binArray.map(c => {
+                return c === '1';
+            })
 
             outputArray.push(boolArray);
         }
