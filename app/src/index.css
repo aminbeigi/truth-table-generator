@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Major Mono Display';
-    src: local('Major Mono Display'), url(./fonts/MajorMonoDisplay-Regular.ttf) format('truetype');
+    src: local('Major Mono Display'), url(./assets/fonts/MajorMonoDisplay-Regular.ttf) format('truetype');
 }
 
 @font-face {
     font-family: 'Roboto';
-    src: local('Roboto'), url(./fonts/Roboto-Light.ttf) format('truetype');
+    src: local('Roboto'), url(./assets/fonts/Roboto-Light.ttf) format('truetype');
 }
 
 body {

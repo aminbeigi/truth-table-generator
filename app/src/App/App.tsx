@@ -10,8 +10,7 @@ import { ExpressionField } from "../components/ExpressionField/ExpressionField";
 import { TruthTable } from "../components/TruthTable/TruthTable";
 import { Icons } from "../components/Icons/Icons";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage";
-
-import { permute, remove, parse, replaceHTML } from "../shared/helper";
+import { Helper } from "../shared/helper";
 
 export const App: React.FC = () => {
   const [value, setValue] = useState<string>("");
@@ -28,7 +27,7 @@ export const App: React.FC = () => {
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let htmlValue: string = e.target.value;
-    htmlValue = replaceHTML(htmlValue);
+    htmlValue = Helper.replaceHTML(htmlValue);
     setValue(htmlValue);
     e.target.value = htmlValue;
   };
@@ -96,8 +95,8 @@ export const App: React.FC = () => {
       }
     }
 
-    operandArray = remove(operandArray, "");
-    const tableRows = permute(operandArray.length);
+    operandArray = Helper.remove(operandArray, "");
+    const tableRows = Helper.permute(operandArray.length);
 
     let expressionSolutionArray: Boolean[] = [];
     for (let boolArray of tableRows) {
@@ -122,7 +121,7 @@ export const App: React.FC = () => {
         if (/[^10|&!()]/.test(evalString)) {
           throw SyntaxError;
         }
-        let expression: number = parse(evalString);
+        let expression: number = Helper.parse(evalString);
         // will sometimes return bool true instead of number 1??
         if (expression === 1 || expression) {
           expressionSolutionArray.push(true);
