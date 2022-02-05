@@ -44,31 +44,27 @@ export const App: React.FC = () => {
       return;
     }
     setEmptyValue(true);
-    try {
-      // TODO: fix operand not operator bug
-      if (/(∧|∨|¬)$|^(∧|∨)/g.test(value)) {
-        throw "The operator is missing an operand.";
-      }
 
-      if (/[/|]/g.test(value)) {
-        throw "The character | shouldn't be here.";
-      }
-
-      if (/[&]/g.test(value)) {
-        throw "The character & shouldn't be here.";
-      }
-    } catch (e) {
-      if (e === "The operator is missing an operand.") {
-        const index = value.search(/(∧|∨|¬)$|^(∧|∨|¬)/g);
-        setErrorObject({ error: e, value: value, index: index });
-      } else if (e === "The character | shouldn't be here.") {
-        setErrorObject({ error: e, value: value, index: value.indexOf("|") });
-      } else if (e === "The character | shouldn't be here.") {
-        setErrorObject({ error: e, value: value, index: value.indexOf("&") });
-      }
+		// check if value is valid before evaluating user input
+    if (/(∧|∨|¬)$|^(∧|∨)/g.test(value)) {
+      const index = value.search(/(∧|∨|¬)$|^(∧|∨|¬)/g);
+			const errorMessage = "The operator is missing an operand.";
+      setErrorObject({ error: errorMessage, value: value, index: index });
       setInvalidValue(true);
-      return;
-    }
+			return;
+		}
+    if (/[/|]/g.test(value)) {
+			const errorMessage = "The character | shouldn't be here.";
+      setErrorObject({ error: errorMessage, value: value, index: value.indexOf("|") });
+      setInvalidValue(true);
+			return;
+		}
+    if (/[&]/g.test(value)) {
+      const errorMessage = "The character & shouldn't be here.";
+      setErrorObject({ error: errorMessage, value: value, index: value.indexOf("&") });
+      setInvalidValue(true);
+			return;
+		}
 
     let operandArray: string[] | string = [];
     let operand: string = "";
