@@ -10,7 +10,7 @@ import { ExpressionField } from "../components/ExpressionField/ExpressionField";
 import { TruthTable } from "../components/TruthTable/TruthTable";
 import { Icons } from "../components/Icons/Icons";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage";
-import { Helper } from "../shared/helper";
+import { parse, permute, remove, replaceHTML } from "../shared/helper";
 
 export const App: React.FC = () => {
   const [value, setValue] = useState<string>("");
@@ -27,7 +27,7 @@ export const App: React.FC = () => {
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let htmlValue: string = e.target.value;
-    htmlValue = Helper.replaceHTML(htmlValue);
+    htmlValue = replaceHTML(htmlValue);
     setValue(htmlValue);
     e.target.value = htmlValue;
   };
@@ -95,8 +95,8 @@ export const App: React.FC = () => {
       }
     }
 
-    operandArray = Helper.remove(operandArray, "");
-    const tableRows = Helper.permute(operandArray.length);
+    operandArray = remove(operandArray, "");
+    const tableRows = permute(operandArray.length);
 
     let expressionSolutionArray: Boolean[] = [];
     for (let boolArray of tableRows) {
@@ -121,7 +121,7 @@ export const App: React.FC = () => {
         if (/[^10|&!()]/.test(evalString)) {
           throw SyntaxError;
         }
-        let expression: number = Helper.parse(evalString);
+        let expression: number = parse(evalString);
         // will sometimes return bool true instead of number 1??
         if (expression === 1 || expression) {
           expressionSolutionArray.push(true);

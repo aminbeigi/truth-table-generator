@@ -1,37 +1,32 @@
-export class Helper {
-    static permute(n: number): boolean[][] {
-        let outputArray: boolean[][] = []
-        for (let i = 0; i < Math.pow(2, n) ; ++i) {
-            let bin = new Number(i).toString(2);
-            if (bin.length < n) {
-                let zeros = '0'.repeat(n - bin.length);
-                bin = zeros + bin;
-            }
-
-            const binArray = Array.from(bin);
-            const boolArray: boolean[] = binArray.map(c => {
-                return c === '1';
-            })
-
-            outputArray.push(boolArray);
-        }
-        return outputArray;
+export function permute(n: number): boolean[][] {
+  let outputArray: boolean[][] = [];
+  for (let i = 0; i < Math.pow(2, n); ++i) {
+    let bin = i.toString(2);
+    if (bin.length < n) {
+      bin = "0".repeat(n - bin.length) + bin;
     }
 
-    static remove(array: string[], value: string): string[] {
-        return array.filter(e => e !== value);
-    }
+    const binArray = Array.from(bin);
+    const boolArray: boolean[] = binArray.map((c) => c === "1");
 
-    static parse(str: string): number {
-        return Function(`'use strict'; return (${str})`)()
-    }
+    outputArray.push(boolArray);
+  }
+  return outputArray;
+}
 
-    static replaceHTML(str: string): string {
-            // using Function constructor as code can only be executed client side on users browser
-            return str.replace(/[^a-zA-Z|&∨∧¬()!]/ig, '')
-                .replace(/[^\x00-\x7F∨∧¬]/ig, '') // block all none ascii characters
-                .replace('||', '∨')
-                .replace('&&', '∧')
-                .replace('!', '¬');
-    }
+export function remove(array: string[], value: string): string[] {
+  return array.filter((e) => e !== value);
+}
+
+export function parse(str: string): number {
+  return Function(`'use strict'; return (${str})`)();
+}
+
+export function replaceHTML(str: string): string {
+  return str
+    .replace(/[^a-zA-Z|&∨∧¬()!]/gi, "")
+    .replace(/[^\x00-\x7F∨∧¬]/gi, "")
+    .replace("||", "∨")
+    .replace("&&", "∧")
+    .replace("!", "¬");
 }
