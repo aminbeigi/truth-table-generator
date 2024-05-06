@@ -5,9 +5,9 @@ import { TruthTableRow } from "./TruthTableRow/TruthTableRow";
 
 interface Props {
   tableHeaders: string[];
-  tableRows: Boolean[][];
+  tableRows: boolean[][];
   expression: string;
-  expressionSolutions: Boolean[];
+  expressionSolutions: boolean[];
 }
 
 export const TruthTable: React.FC<Props> = ({
@@ -16,35 +16,28 @@ export const TruthTable: React.FC<Props> = ({
   expression,
   expressionSolutions,
 }) => {
-  const row_length = [];
-  for (let i = 0; i < Math.pow(2, tableHeaders.length); ++i) {
-    row_length.push("F");
-  }
-
   return (
-    <div>
+    <>
       <StyledTable>
         <thead>
           <tr>
-            {tableHeaders.map((tableHeader, i) => {
-              return <TruthTableHeader key={i} tableHeader={tableHeader} />;
-            })}
+            {tableHeaders.map((tableHeader, index) => (
+              <TruthTableHeader key={index} tableHeader={tableHeader} />
+            ))}
             <th>{expression}</th>
           </tr>
         </thead>
 
         <tbody>
-          {tableRows.map((tableRow, i) => {
-            return (
-              <TruthTableRow
-                key={i}
-                tableRow={tableRow}
-                expressionSolution={expressionSolutions[i]}
-              />
-            );
-          })}
+          {tableRows.map((tableRow, index) => (
+            <TruthTableRow
+              key={index}
+              tableRow={tableRow}
+              expressionSolution={expressionSolutions[index]}
+            />
+          ))}
         </tbody>
       </StyledTable>
-    </div>
+    </>
   );
 };

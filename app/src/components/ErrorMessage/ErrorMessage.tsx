@@ -1,12 +1,9 @@
 import React from "react";
 import { Wrapper, SyntaxOkay, SyntaxBad, ErrorMessageText } from "./styled";
+import { IErrorObject } from "../../shared/types";
 
 interface Props {
-  errorObject: {
-    error: string;
-    value: string;
-    index: number;
-  };
+  errorObject: IErrorObject;
 }
 
 export const ErrorMessage: React.FC<Props> = ({ errorObject }) => {
@@ -17,9 +14,9 @@ export const ErrorMessage: React.FC<Props> = ({ errorObject }) => {
       </Wrapper>
     );
   }
-  let value = errorObject["value"];
-  let index = errorObject["index"];
-  let operator = value[index];
+  const value = errorObject["value"];
+  const index = errorObject["index"];
+  const operator = value[index];
   const array = [value.slice(0, index), value.slice(index + 1)]; // only slice first occurence
   return (
     <Wrapper>

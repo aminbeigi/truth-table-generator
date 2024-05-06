@@ -30,3 +30,5 @@ export function replaceHTML(str: string): string {
     .replace("&&", "∧")
     .replace("!", "¬");
 }
+
+export const INVALID_CHAR_REGEX = /[/|&]/g;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+
 import { BodyText, UL, LI, StyledModalTitle } from "./styled";
 
 export const Icons: React.FC = () => {
@@ -12,7 +13,7 @@ export const Icons: React.FC = () => {
   return (
     <>
       <div>
-        <a href={githubLink}>
+        <a href={githubLink} target="_blank" rel="noopener noreferrer" >
           <i className="fab fa-github"></i>
         </a>
       </div>

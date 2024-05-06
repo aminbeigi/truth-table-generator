@@ -1,8 +1,8 @@
 import React from "react";
 
 interface Props {
-  tableRow: Boolean[];
-  expressionSolution: Boolean;
+  tableRow: boolean[];
+  expressionSolution: boolean;
 }
 
 export const TruthTableRow: React.FC<Props> = ({
@@ -11,11 +11,10 @@ export const TruthTableRow: React.FC<Props> = ({
 }) => {
   return (
     <tr>
-      {tableRow.map((tableData, i) => {
-        return tableData ? <td key={i}>T</td> : <td key={i}>F</td>;
-      })}
-
-      {expressionSolution ? <td>T</td> : <td>F</td>}
+      {tableRow.map((tableData, index) => (
+        <td key={index}>{tableData ? "T" : "F"}</td>
+      ))}
+      <td>{expressionSolution ? "T" : "F"}</td>
     </tr>
   );
 };
