@@ -38,6 +38,6 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.39",
-    "@types/react-bootstrap": "^0.32.25"
+    "@types/react-bootstrap": "^0.32.29"
   }
 }
