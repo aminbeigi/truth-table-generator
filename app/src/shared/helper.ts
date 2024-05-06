@@ -32,3 +32,4 @@ export function replaceHTML(str: string): string {
 }
 
 export const INVALID_CHAR_REGEX = /[/|&]/g;
+export const INVALID_SYNTAX_ERROR_MESSAGE = "Invalid syntax."

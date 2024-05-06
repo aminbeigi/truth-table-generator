@@ -8,12 +8,12 @@ export const Icons: React.FC = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const githubLink = "https://github.com/aminbeigi/truth-table-generator";
+  const GITHUB_LINK = "https://github.com/aminbeigi/truth-table-generator";
 
   return (
     <>
       <div>
-        <a href={githubLink} target="_blank" rel="noopener noreferrer" >
+        <a href={GITHUB_LINK} target="_blank" rel="noopener noreferrer" >
           <i className="fab fa-github"></i>
         </a>
       </div>

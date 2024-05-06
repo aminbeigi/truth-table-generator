@@ -13,6 +13,7 @@ import { Icons } from "../components/Icons/Icons";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage";
 import {
   INVALID_CHAR_REGEX,
+  INVALID_SYNTAX_ERROR_MESSAGE,
   parse,
   permute,
   remove,
@@ -130,7 +131,7 @@ export const App: React.FC = () => {
         }
         setInvalidValue(false);
       } catch (error: unknown) {
-        setErrorObject({ error: "Invalid syntax.", value, index: -1 });
+        setErrorObject({ error: INVALID_SYNTAX_ERROR_MESSAGE, value, index: -1 });
         setInvalidValue(true);
       }
     }

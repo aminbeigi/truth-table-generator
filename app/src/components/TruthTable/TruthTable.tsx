@@ -1,4 +1,5 @@
 import React from "react";
+
 import { StyledTable } from "./styled";
 import { TruthTableHeader } from "./TruthTableHeader/TruthTableHeader";
 import { TruthTableRow } from "./TruthTableRow/TruthTableRow";

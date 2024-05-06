@@ -1,31 +1,38 @@
 import React from "react";
+
 import { Wrapper, SyntaxOkay, SyntaxBad, ErrorMessageText } from "./styled";
 import { IErrorObject } from "../../shared/types";
+import { INVALID_SYNTAX_ERROR_MESSAGE } from "../../shared/helper";
 
 interface Props {
   errorObject: IErrorObject;
 }
 
 export const ErrorMessage: React.FC<Props> = ({ errorObject }) => {
-  if (errorObject["error"] === "Invalid syntax.") {
+  const { error, value, index } = errorObject;
+
+  if (error === INVALID_SYNTAX_ERROR_MESSAGE) {
     return (
       <Wrapper>
-        <ErrorMessageText>{errorObject["error"]}</ErrorMessageText>
+        <ErrorMessageText>{error}</ErrorMessageText>
       </Wrapper>
     );
   }
-  const value = errorObject["value"];
-  const index = errorObject["index"];
+
   const operator = value[index];
-  const array = [value.slice(0, index), value.slice(index + 1)]; // only slice first occurence
+  const [partBeforeOperator, partAfterOperator] = [
+    value.slice(0, index),
+    value.slice(index + 1),
+  ];
+
   return (
     <Wrapper>
       <SyntaxOkay>
-        {array[0]}
+        {partBeforeOperator}
         <SyntaxBad>{operator}</SyntaxBad>
-        {array[1]}
+        {partAfterOperator}
       </SyntaxOkay>
-      <ErrorMessageText>{errorObject["error"]}</ErrorMessageText>
+      <ErrorMessageText>{error}</ErrorMessageText>
     </Wrapper>
   );
 };
